@@ -10,39 +10,47 @@
   <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
   <title>B+</title>
+  <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <header class="bmd-layout-header">
+      <div class="navbar navbar-dark fixed-top bg-faded justify-content-start">
+        <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-expanded="false">
+          <span class="sr-only">Toggle drawer</span>
+          <i class="material-icons">menu</i>
+        </button>
+        <a class="navbar-brand" href="/list.html">&nbsp;&nbsp;Cheer Me Up!</a>
+      </div>
+    </header>
+    <div id="dw-s2" class="bmd-layout-drawer bg-faded" aria-expanded="false" aria-hidden="false">
+      <header>
+        <a class="navbar-brand">B+</a>
+      </header>
+      <ul class="list-group">
+        <a id="menuShowAllQuotes" class="list-group-item"><i class="material-icons">people_alt</i>Timeline</a>
+        <a id="menuShowMyQuotes" class="list-group-item"><i class="material-icons">person</i>Incinerator</a>
+        <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Cheer Up</a>
+        <a id="menuSignOut" class="list-group-item"><i class="material-icons">login</i>Sign Out</a>
+      </ul>
+    </div>
 </head>
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">Sign In</a>
+    <a class="navbar-brand" href="#">Cheer Me Up!</a>
     <!-- <button id="signOutButton" type="button" class="btn text-white">Sign Out</button> -->
   </nav>
   <div id="mainPage" class="container page-container">
 
-    
-      <!-- Email input -->
-      <div class="lineColor form-outline mb-4">
-        <input type="email" id="inputEmail" class="form-control" />
-        <label style="color: #000000" class="form-label" for="inputEmail">Email address</label>
-      </div>
-    
-      <!-- Password input -->
-      <div class="lineColor form-outline mb-4">
-        <input type="password" id="inputPassword" class="form-control" />
-        <label style="color: #000000" class="form-label" for="inputPassword">Password</label>
-      </div>
+    <div>&nbsp;</div>
+  <button style="background-color: #FFB800; color: white;" id="createAccountButtonDedicated" type="button" class="btn btn-primary centered">Cheer Me Up!</button>
 
-      <button style="background-color: #FFB800; color: white;" id="createAccountButton"type="button" class="btn btn-primary">Create Account</button>
-      <button style="background-color: #FFB800; color: white;"id="logInButton"type="button" class="btn btn-primary">Log In</button>
-
-      <div>
-        <button style="background-color: #FFB800; color: white;"id="rosefireButton"type="button" class="btn btn-primary">Log In with Rosefire</button>
-      </div>
-    
+  
 
   <div id="firebaseui-auth-container"></div>
 
 
+  <div>
+    <img id="bunny" class="rose_image" src="images/cheeruptest.gif" alt="bunny gif">
+  </div>
   </div>
   <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />

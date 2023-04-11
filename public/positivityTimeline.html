@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel = "icon" type = "imae/x-icon" href = "favicon.ico">
+  <title>B+</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Your Positivity Timeline</a>
+  </nav>
+  <div id="QuotePage" class="container page-container">
+
+  <div id="quoteListContainer">
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  </div>
+
+  <button id="fab" type = "button" class = "btn btn-primary bmd-btn-fab" data-toggle="modal" data-target="#addQuoteDialog">
+    <i class="material-icons">add</i>
+  </button>
+
+<div class="modal fade" id="addQuoteDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">What are you happy about?</h5>
+      </div>
+      <div class="modal-body">
+        
+       
+          <div class="form-group">
+            <label for="inputQuote" class="bmd-label-floating">Message</label>
+            <input type="text" class="form-control" id="inputQuote">
+          </div>
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="submitAddQuote" type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>

@@ -14,30 +14,31 @@
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">Sign In</a>
+    <a class="navbar-brand" href="#">Negativity Incinerator</a>
     <!-- <button id="signOutButton" type="button" class="btn text-white">Sign Out</button> -->
   </nav>
   <div id="mainPage" class="container page-container">
 
     
-      <!-- Email input -->
-      <div class="lineColor form-outline mb-4">
-        <input type="email" id="inputEmail" class="form-control" />
-        <label style="color: #000000" class="form-label" for="inputEmail">Email address</label>
+      <!-- input -->
+      <div class="negInc" class="lineColor form-outline mb-4">
+        <div>&nbsp;</div>
+        <center>
+        <label class="negText form-label" for="inputNeg">Whats Bothering you Today?</label>
+        </center>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <input type="negative" id="inputnegative" class="form-control" />
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
       </div>
     
-      <!-- Password input -->
-      <div class="lineColor form-outline mb-4">
-        <input type="password" id="inputPassword" class="form-control" />
-        <label style="color: #000000" class="form-label" for="inputPassword">Password</label>
-      </div>
-
-      <button style="background-color: #FFB800; color: white;" id="createAccountButton"type="button" class="btn btn-primary">Create Account</button>
-      <button style="background-color: #FFB800; color: white;"id="logInButton"type="button" class="btn btn-primary">Log In</button>
 
       <div>
-        <button style="background-color: #FFB800; color: white;"id="rosefireButton"type="button" class="btn btn-primary">Log In with Rosefire</button>
+        <img id="fire" class="rose_image" src="images/garbage-can-flame.gif" alt="garbage can flame">
       </div>
+
     
 
   <div id="firebaseui-auth-container"></div>
