@@ -49,7 +49,7 @@ rhit.ListPageController = class {
 			const mq = rhit.fbMovieQuotesManager.getMovieQuoteAtIndex(i);
 			const newCard = this._createCard(mq);
 			newCard.onclick = (event) => {
-				window.location.href = `/positivityTimeline.html?id=${mq.id}`;
+				window.location.href = `/timelineElement.html?id=${mq.id}`;
 			}
 			newList.appendChild(newCard);
 		}
