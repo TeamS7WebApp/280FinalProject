@@ -204,6 +204,62 @@ rhit.FbSingleQuoteManager = class {
  }
 }
 
+rhit.CheerUpPageController = class {
+	constructor(){
+		document.querySelector("#quoteTextCheerUp").innerHTML = this.getQuote();
+		console.log(this.getQuote());
+		console.log(document.querySelector("#quoteTextCheerUp").innerHTML);
+		document.querySelector("#CheerUpButton").addEventListener("click", (event) => {
+			location.reload();
+		});
+	}
+
+	getQuote(){
+		let index = Math.floor(750 * Math.random());
+		console.log(index);
+		fetch("https://type.fit/api/quotes")
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+			// console.log(JSON.stringify(data));
+			// console.log(JSON.stringify(data[index]));
+			let curIndex = JSON.stringify(data[index]);
+			let final = "";
+			for(let i = 9; i < curIndex.length; i++){
+				if(curIndex[i] == '"'){
+					break;
+				}
+				final += curIndex[i];
+			}
+			document.querySelector("#quoteTextCheerUp").innerHTML = final;
+
+			final = "";
+			let stopIndex = 0;
+			for(let i = curIndex.length - 3; i > 0; i--){
+				if(curIndex[i] == '"'){
+					stopIndex = i;
+					break;
+				}
+				final += curIndex[i];
+			}
+			for(let i = stopIndex; i < curIndex.length; i++){
+				if(curIndex[i] == '"'){
+					break;
+				}
+				final += curIndex[i];
+			}
+			let final2 = "";
+			for(let i = final.length - 1; i > -1; i--){
+				final2 += final[i];
+			}
+
+			document.querySelector("#quoteTextCheerUp1").innerHTML = final2;
+
+		});
+	}
+}
+
 /* Main */
 /** function and class syntax examples */
 rhit.main = function () {
@@ -234,7 +290,10 @@ rhit.main = function () {
 
 	}
 
-
+	if(document.querySelector("#CheerUpPage")){
+		rhit.cheerUpContoller = new rhit.CheerUpPageController();
+		console.log("cheer up page controller created");
+	}
 
 };
 

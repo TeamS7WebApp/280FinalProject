@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
   <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
   <link rel="stylesheet" href="styles/main.css">
+  <script rel="images" href="Motivational_Image_API/index.js"></script>
   <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
   <title>B+</title>
@@ -36,20 +37,21 @@
 <body>
   <nav class="navbar navbar-dark fixed-top">
     <a class="navbar-brand" href="#">Cheer Me Up!</a>
-    <!-- <button id="signOutButton" type="button" class="btn text-white">Sign Out</button> -->
   </nav>
-  <div id="mainPage" class="container page-container">
+  <div id="CheerUpPage" class="container page-container">
 
     <div>&nbsp;</div>
-  <button style="background-color: #FFB800; color: white;" id="createAccountButtonDedicated" type="button" class="btn btn-primary centered">Cheer Me Up!</button>
+  <button style="background-color: #FFB800; color: white;" id="CheerUpButton" type="button" class="btn btn-primary centered">Cheer Me Up!</button>
 
   
 
   <div id="firebaseui-auth-container"></div>
 
 
-  <div>
-    <img id="bunny" class="rose_image" src="images/cheeruptest.gif" alt="bunny gif">
+  <div class="container1">
+    <img id="bunny" class="rose_image" src="https://picsum.photos/1000/1000" alt="bunny gif">
+    <div id="quoteTextCheerUp">Loading Quote</div>
+    <div id="quoteTextCheerUp1">Loading Author</div>
   </div>
   </div>
   <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>

@@ -83,3 +83,19 @@ body {
 #cardQuote{
     text-align: center;
 }
+
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 430px;
+    margin: auto;
+    text-align: center;
+}
+
+.container1 {
+    position: relative;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    text-shadow: 1px 1px #FFB800;
+}
