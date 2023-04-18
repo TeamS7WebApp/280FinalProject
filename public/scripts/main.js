@@ -125,8 +125,8 @@ rhit.DetailPageController = class {
 
 		document.querySelector("#submitEditQuote").addEventListener("click", (event) => {
 			const quote = document.querySelector("#inputQuote").value;
-			const movie = document.querySelector("#inputMovie").value;
-			rhit.fbSingleQuoteManager.update(quote, movie);
+			// const movie = document.querySelector("#inputMovie").value;
+			rhit.fbSingleQuoteManager.update(quote, quote);
 		});
 
 
@@ -141,7 +141,7 @@ rhit.DetailPageController = class {
 		document.querySelector("#submitDeleteQuote").addEventListener("click", (event) => {
 			rhit.fbSingleQuoteManager.delete().then(function() {
 				console.log("Document successfully deleted!");
-				window.location.href = "/";
+				window.location.href = "/positivityTimeline.html";
 			}).catch(function(error){
 				console.error("Error removing document: ", error);
 			});
@@ -151,7 +151,7 @@ rhit.DetailPageController = class {
 	}
 	updateView() {  
 		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleQuoteManager.quote;
-		document.querySelector("#cardMovie").innerHTML = rhit.fbSingleQuoteManager.movie;
+		// document.querySelector("#cardMovie").innerHTML = rhit.fbSingleQuoteManager.movie;
 
 	}
 }
