@@ -207,7 +207,7 @@ rhit.FbSingleQuoteManager = class {
 rhit.CheerUpPageController = class {
 	constructor(){
 		document.querySelector("#quoteTextCheerUp").innerHTML = this.getQuote();
-		console.log(this.getQuote());
+		// console.log(this.getQuote());
 		console.log(document.querySelector("#quoteTextCheerUp").innerHTML);
 		document.querySelector("#CheerUpButton").addEventListener("click", (event) => {
 			location.reload();
@@ -215,8 +215,9 @@ rhit.CheerUpPageController = class {
 	}
 
 	getQuote(){
-		let index = Math.floor(750 * Math.random());
+		let index = Math.floor(1649 * Math.random());
 		console.log(index);
+		// let index = 1649;
 		fetch("https://type.fit/api/quotes")
 		.then(function(response) {
 			return response.json();
@@ -226,8 +227,8 @@ rhit.CheerUpPageController = class {
 			// console.log(JSON.stringify(data[index]));
 			let curIndex = JSON.stringify(data[index]);
 			let final = "";
-			for(let i = 9; i < curIndex.length; i++){
-				if(curIndex[i] == '"'){
+			for(let i = 9; i < curIndex.length; i++){		//These loops parse the JSON data for the quote
+				if(curIndex[i] == '"'){						//Please dont touch for now
 					break;
 				}
 				final += curIndex[i];
