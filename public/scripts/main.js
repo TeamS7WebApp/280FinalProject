@@ -260,6 +260,23 @@ rhit.CheerUpPageController = class {
 	}
 }
 
+rhit.sideBarController = class {
+	constructor(){
+		document.querySelector("#menuShowAllQuotes").addEventListener("click", (event) => {
+			window.location.href = "/positivityTimeline.html";
+		});
+		document.querySelector("#menuShowMyQuotes").addEventListener("click", (event) => {
+			window.location.href = "/negativityIncinerator.html";
+		});
+		document.querySelector("#menuCheerUp").addEventListener("click", (event) => {
+			window.location.href = "/CheerUp.html";
+		});
+		document.querySelector("#menuSignOut").addEventListener("click", (event) => {
+			window.location.href = "/";	//need to enable authentication to have logout method
+		});
+	}
+}
+
 /* Main */
 /** function and class syntax examples */
 rhit.main = function () {
@@ -293,6 +310,11 @@ rhit.main = function () {
 	if(document.querySelector("#CheerUpPage")){
 		rhit.cheerUpContoller = new rhit.CheerUpPageController();
 		console.log("cheer up page controller created");
+	}
+
+	if(document.querySelector("#dw-s2")){
+		rhit.sideController = new rhit.sideBarController();
+		console.log("Side bar controller created");
 	}
 
 };
