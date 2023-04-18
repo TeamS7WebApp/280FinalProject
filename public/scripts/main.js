@@ -249,7 +249,7 @@ rhit.CheerUpPageController = class {
 				}
 				final += curIndex[i];
 			}
-			let final2 = "";
+			let final2 = "-";
 			for(let i = final.length - 1; i > -1; i--){
 				final2 += final[i];
 			}
