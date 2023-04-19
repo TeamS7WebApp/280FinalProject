@@ -99,3 +99,30 @@ body {
     font-weight: bold;
     text-shadow: 1px 1px #FFB800;
 }
+
+.bmd-layout-container{
+    height: 100vh;
+}
+
+.bmd-layout-drawer>header {
+    background-color: #FFB800;
+    color: white;
+}
+
+.bmd-layout-drawer>ul {
+    background-color: #ddd;
+}
+
+.list-group-item :first-child {
+    margin-right: 1rem;
+}
+
+#menuEdit,
+#submitDeleteQuote{
+    display: none;
+}
+
+
+.dropdown-menu-right{
+    left: -128px;
+}

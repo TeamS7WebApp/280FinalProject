@@ -16,7 +16,7 @@ function htmlToElement(html){
 	return template.content.firstChild;
 }
 
-rhit.ListPageController = class {
+rhit.PositivityTimelineController = class {
 	constructor() {
 
 		document.querySelector("#submitAddQuote").addEventListener("click",(event) => {
@@ -69,7 +69,7 @@ rhit.ListPageController = class {
 	}
 }
    
-rhit.MovieQuote = class {
+rhit.TimelineElement = class {
 	constructor(id, quote, movie) {
 		this.id = id;
 		this.quote = quote;
@@ -77,7 +77,7 @@ rhit.MovieQuote = class {
 	}
 }
 
-rhit.FbMovieQuotesManager = class {
+rhit.ElementManager = class {
 	constructor() {
 	  this._documentSnapshots = [];
 	  this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE);
@@ -113,14 +113,14 @@ rhit.FbMovieQuotesManager = class {
 	    }
 	getMovieQuoteAtIndex(index) {    
 		const docSnapshot = this._documentSnapshots[index];
-		const mq = new rhit.MovieQuote(
+		const mq = new rhit.TimelineElement(
 			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_QUOTE),docSnapshot.get(rhit.FB_KEY_MOVIE),
 		);
 		return mq;
 	}
 }
 
-rhit.DetailPageController = class {
+rhit.TimelineElementController = class {
 	constructor() {
 
 		document.querySelector("#submitEditQuote").addEventListener("click", (event) => {
@@ -156,7 +156,7 @@ rhit.DetailPageController = class {
 	}
 }
 
-rhit.FbSingleQuoteManager = class {
+rhit.SingleElementManager = class {
  constructor(movieQuoteId) {
    this._documentSnapshot = {};
    this._unsubscribe = null;
@@ -285,8 +285,8 @@ rhit.main = function () {
 
 	if(document.querySelector("#QuotePage")){
 		console.log("list page");
-		rhit.fbMovieQuotesManager = new rhit.FbMovieQuotesManager();
-		new rhit.ListPageController();
+		rhit.fbMovieQuotesManager = new rhit.ElementManager();
+		new rhit.PositivityTimelineController();
 		console.log("List page created");
 	}
 
@@ -303,8 +303,8 @@ rhit.main = function () {
 			window.location.href = "/";
 		}
 
-		rhit.fbSingleQuoteManager = new rhit.FbSingleQuoteManager(movieQuoteId);
-		new rhit.DetailPageController();
+		rhit.fbSingleQuoteManager = new rhit.SingleElementManager(movieQuoteId);
+		new rhit.TimelineElementController();
 
 	}
 
