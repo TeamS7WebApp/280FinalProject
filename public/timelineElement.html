@@ -14,29 +14,27 @@
 
 <body>
   <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="/">Positivity Timeline</a>
-
-    
+    <div class="navbar navbar-dark fixed-top bg-faded justify-content-start">
+      <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-expanded="false">
+        <span class="sr-only">Toggle drawer</span>
+        <i class="material-icons">menu</i>
+      </button>
+      <a class="navbar-brand" href="/list.html">&nbsp;&nbsp;Your Positivity Timeline</a>
+      <div class="editMenu dropdown pull-xs-right">
+        <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="material-icons">more_vert</i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
+          <button class="dropdown-item" type="button"><i class="material-icons" data-toggle="modal" data-target="#editQuoteDialog">edit</i>&nbsp;&nbsp;&nbsp;Edit</button>
+          <button id="submitDeleteQuote" class="dropdown-item" type="button"><i class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete</button>
+        </div>
+      </div>
+    </div>
   </nav>
 
   <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
     <header class="bmd-layout-header">
-      <div class="navbar navbar-dark fixed-top bg-faded justify-content-start">
-        <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2" aria-expanded="false">
-          <span class="sr-only">Toggle drawer</span>
-          <i class="material-icons">menu</i>
-        </button>
-        <a class="navbar-brand" href="/list.html">&nbsp;&nbsp;Your Positivity Timeline</a>
-        <div class="editMenu dropdown pull-xs-right">
-          <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="material-icons">more_vert</i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
-            <button class="dropdown-item" type="button"><i class="material-icons" data-toggle="modal" data-target="#editQuoteDialog">edit</i>&nbsp;&nbsp;&nbsp;Edit</button>
-            <button id="submitDeleteQuote" class="dropdown-item" type="button"><i class="material-icons">delete</i>&nbsp;&nbsp;&nbsp;Delete</button>
-          </div>
-        </div>
-      </div>
+      
 
       
       
