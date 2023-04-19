@@ -130,3 +130,7 @@ body {
     color: white;
     z-index: 999;
 }
+
+.bmd-layout-canvas{
+    height: 100vh;
+}
