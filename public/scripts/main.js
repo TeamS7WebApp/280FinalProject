@@ -223,8 +223,8 @@ rhit.CheerUpPageController = class {
 			return response.json();
 		})
 		.then(function(data) {
-			// console.log(JSON.stringify(data));
-			// console.log(JSON.stringify(data[index]));
+			console.log(JSON.stringify(data));
+			console.log(JSON.stringify(data[index]));
 			let curIndex = JSON.stringify(data[index]);
 			let final = "";
 			for(let i = 9; i < curIndex.length; i++){		//These loops parse the JSON data for the quote
