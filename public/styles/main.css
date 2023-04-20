@@ -134,3 +134,7 @@ body {
 .bmd-layout-canvas{
     height: 100vh;
 }
+
+.background{
+    background-image: url('img_girl.jpg');
+}
