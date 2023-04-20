@@ -224,8 +224,8 @@ rhit.CheerUpPageController = class {
 			return response.json();
 		})
 		.then(function(data) {
-			console.log(JSON.stringify(data));
-			console.log(JSON.stringify(data[index]));
+			// console.log(JSON.stringify(data));
+			// console.log(JSON.stringify(data[index]));
 			let curIndex = JSON.stringify(data[index]);
 			let final = "";
 			for(let i = 9; i < curIndex.length; i++){		//These loops parse the JSON data for the quote
@@ -281,7 +281,60 @@ rhit.sideBarController = class {
 
 rhit.LoginPageController = class{
 	constructor(){
+		const inputEmailEl = document.querySelector("#inputEmail");
+   		const inputPasswordEl = document.querySelector("#inputPassword");
 		rhit.startFirebaseUI();
+
+		document.querySelector("#createAccountButton").onclick = (event) => {
+			console.log(`Create account for email: ${inputEmailEl.value}  password: ${inputPasswordEl.value}`);
+			firebase.auth().createUserWithEmailAndPassword(inputEmailEl.value, inputPasswordEl.value)
+			.then((userCredential) => {
+			// Signed in
+			var user = userCredential.user;
+			console.log("Created user");
+			// ...
+			})
+			.catch((error) => {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				// console.log("Create user error", errorCode, errorMessage);
+			});
+		};
+	
+	
+		document.querySelector("#logInButton").onclick = (event) => {
+			console.log(`Log in to existing account for email: ${inputEmailEl.value}  password: ${inputPasswordEl.value}`);
+			firebase.auth().signInWithEmailAndPassword(inputEmailEl.value, inputPasswordEl.value)
+			.then((userCredential) => {
+				// Signed in
+				console.log("Signed in", uid);
+				var user = userCredential.user;
+				// ...
+			})
+			.catch((error) => {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				// console.log("Create user error", errorCode, errorMessage);
+			});
+		};
+		
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				var uid = user.uid;
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var providerData = user.providerData;
+				console.log("Signed in", uid);
+			} else {
+				console.log("No user is signed in.");
+			}
+		  });
+
+		
+
 	}
 }
 
@@ -337,9 +390,9 @@ rhit.startFirebaseUI = function() {		//used for firebase authentication ui
 	var uiConfig = {
 		signInSuccessUrl: rhit.MainPage, // redirecting URL
 		signInOptions: [
-			firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+			// firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 			firebase.auth.EmailAuthProvider.PROVIDER_ID,
-			firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+			// firebase.auth.PhoneAuthProvider.PROVIDER_ID,
 			firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
 		],
 	};
