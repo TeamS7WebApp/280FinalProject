@@ -47,7 +47,7 @@ rhit.PositivityTimelineController = class {
 		const newList = htmlToElement('<div id="quoteListContainer"></div>');
 
 		for(let i = 0; i < rhit.fbMovieQuotesManager.length; i++){
-			const mq = rhit.fbMovieQuotesManager.getMovieQuoteAtIndex(i);
+			const mq = rhit.fbMovieQuotesManager.getElementAtIndex(i);
 			const newCard = this._createCard(mq);
 			newCard.onclick = (event) => {
 				window.location.href = `/timelineElement.html?id=${mq.id}`;
@@ -62,10 +62,11 @@ rhit.PositivityTimelineController = class {
 		oldList.parentElement.appendChild(newList);
 	}
 
-	_createCard(movieQuote) {
+	_createCard(happyElement) {
+		// console.log(happyElement);
 		return htmlToElement(`<div class="card">
 		<div class="card-body">
-		  <h5 style="text-align: center;" class="card-title">${movieQuote.quote}</h5>
+		  <h5 style="text-align: center;" class="card-title">${happyElement.happyElement}</h5>
 		</div>`);
 	}
 }
@@ -73,8 +74,8 @@ rhit.PositivityTimelineController = class {
 rhit.TimelineElement = class {
 	constructor(id, quote, movie) {
 		this.id = id;
-		this.quote = quote;
-		this.movie = movie;  
+		this.happyElement = quote;
+		this.otherHappyElement = movie;  
 	}
 }
 
@@ -84,10 +85,10 @@ rhit.ElementManager = class {
 	  this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE);
 	  this._unsubscribe = null;
 	}
-	add(quote, movie) {  
+	add(happyElement, otherHappyElement) {  
     this._ref.add({
-		[rhit.FB_KEY_QUOTE]: quote,
-		[rhit.FB_KEY_MOVIE]: movie,
+		[rhit.FB_KEY_QUOTE]: happyElement,
+		[rhit.FB_KEY_MOVIE]: otherHappyElement,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
 	})
 	.then(function(docRef){
@@ -112,7 +113,7 @@ rhit.ElementManager = class {
 	get length() {
 		return this._documentSnapshots.length;
 	    }
-	getMovieQuoteAtIndex(index) {    
+	getElementAtIndex(index) {    
 		const docSnapshot = this._documentSnapshots[index];
 		const mq = new rhit.TimelineElement(
 			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_QUOTE),docSnapshot.get(rhit.FB_KEY_MOVIE),
@@ -125,14 +126,14 @@ rhit.TimelineElementController = class {
 	constructor() {
 
 		document.querySelector("#submitEditQuote").addEventListener("click", (event) => {
-			const quote = document.querySelector("#inputQuote").value;
+			const quote = document.querySelector("#inputQuote").happyText;
 			// const movie = document.querySelector("#inputMovie").value;
 			rhit.fbSingleQuoteManager.update(quote, quote);
 		});
 
 
 		$("#editQuoteDialog").on("show.bs.modal", (event) => {
-			document.querySelector("#inputQuote").value = rhit.fbSingleQuoteManager.quote;
+			document.querySelector("#inputQuote").value = rhit.fbSingleQuoteManager.happyText;
 			// document.querySelector("#inputMovie").value = rhit.fbSingleQuoteManager.movie;
 		});
 		$("#editQuoteDialog").on("shown.bs.modal", (event) => {
@@ -151,7 +152,7 @@ rhit.TimelineElementController = class {
 		rhit.fbSingleQuoteManager.beginListening(this.updateView.bind(this));
 	}
 	updateView() {  
-		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleQuoteManager.quote;
+		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleQuoteManager.happyText;
 		// document.querySelector("#cardMovie").innerHTML = rhit.fbSingleQuoteManager.movie;
 
 	}
@@ -180,10 +181,10 @@ rhit.SingleElementManager = class {
  stopListening() {
    this._unsubscribe();
  }
- update(quote, movie) {
+ update(happyText, otherHappyText) {
 	this._ref.update({
-		[rhit.FB_KEY_QUOTE]: quote,
-		[rhit.FB_KEY_MOVIE]: movie,
+		[rhit.FB_KEY_QUOTE]: happyText,
+		[rhit.FB_KEY_MOVIE]: otherHappyText,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
 	})
 	.then(() => {
@@ -197,10 +198,10 @@ rhit.SingleElementManager = class {
 	return this._ref.delete()
  }
 
- get quote(){
+ get happyText(){
 	return this._documentSnapshot.get(rhit.FB_KEY_QUOTE);
  }
- get movie(){
+ get otherHappyText(){
 	return this._documentSnapshot.get(rhit.FB_KEY_MOVIE);
  }
 }
@@ -217,7 +218,7 @@ rhit.CheerUpPageController = class {
 
 	getQuote(){
 		let index = Math.floor(1649 * Math.random());
-		console.log(index);
+		// console.log(index);
 		// let index = 1649;
 		fetch("https://type.fit/api/quotes")
 		.then(function(response) {
@@ -281,13 +282,13 @@ rhit.sideBarController = class {
 
 rhit.LoginPageController = class{
 	constructor(){
-		const inputEmailEl = document.querySelector("#inputEmail");
-   		const inputPasswordEl = document.querySelector("#inputPassword");
+		const inputEmail = document.querySelector("#inputEmail");
+   		const inputPassword = document.querySelector("#inputPassword");
 		rhit.startFirebaseUI();
 
 		document.querySelector("#createAccountButton").onclick = (event) => {
-			console.log(`Create account for email: ${inputEmailEl.value}  password: ${inputPasswordEl.value}`);
-			firebase.auth().createUserWithEmailAndPassword(inputEmailEl.value, inputPasswordEl.value)
+			console.log(`Create account for email: ${inputEmail.value}  password: ${inputPassword.value}`);
+			firebase.auth().createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
 			.then((userCredential) => {
 			// Signed in
 			var user = userCredential.user;
@@ -303,8 +304,8 @@ rhit.LoginPageController = class{
 	
 	
 		document.querySelector("#logInButton").onclick = (event) => {
-			console.log(`Log in to existing account for email: ${inputEmailEl.value}  password: ${inputPasswordEl.value}`);
-			firebase.auth().signInWithEmailAndPassword(inputEmailEl.value, inputPasswordEl.value)
+			console.log(`Log in to existing account for email: ${inputEmail.value}  password: ${inputPassword.value}`);
+			firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
 			.then((userCredential) => {
 				// Signed in
 				console.log("Signed in", uid);
@@ -334,6 +335,12 @@ rhit.LoginPageController = class{
 		  });
 
 		
+
+	}
+}
+
+rhit.IncineratorPageController = class {
+	constructor(){
 
 	}
 }
@@ -391,7 +398,7 @@ rhit.startFirebaseUI = function() {		//used for firebase authentication ui
 		signInSuccessUrl: rhit.MainPage, // redirecting URL
 		signInOptions: [
 			// firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-			firebase.auth.EmailAuthProvider.PROVIDER_ID,
+			// firebase.auth.EmailAuthProvider.PROVIDER_ID,
 			// firebase.auth.PhoneAuthProvider.PROVIDER_ID,
 			firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
 		],
