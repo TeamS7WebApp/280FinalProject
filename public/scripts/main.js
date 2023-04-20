@@ -7,6 +7,7 @@ rhit.FB_KEY_MOVIE = "text";
 rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
 rhit.fbMovieQuotesManager = null;
 rhit.fbSingleQuoteManager = null;
+rhit.MainPage = '/positivityTimeline.html';
 
 //From stackoverflow
 function htmlToElement(html){
@@ -278,6 +279,12 @@ rhit.sideBarController = class {
 	}
 }
 
+rhit.LoginPageController = class{
+	constructor(){
+		rhit.startFirebaseUI();
+	}
+}
+
 /* Main */
 /** function and class syntax examples */
 rhit.main = function () {
@@ -318,6 +325,27 @@ rhit.main = function () {
 		console.log("Side bar controller created");
 	}
 
+	if(document.querySelector("#mainPage")){
+		console.log("login page");
+		rhit.loginController = new rhit.LoginPageController();
+		console.log("Login page controller created")
+	}
+
 };
+
+rhit.startFirebaseUI = function() {		//used for firebase authentication ui
+	var uiConfig = {
+		signInSuccessUrl: rhit.MainPage, // redirecting URL
+		signInOptions: [
+			firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+			firebase.auth.EmailAuthProvider.PROVIDER_ID,
+			firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+			firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+		],
+	};
+	const ui = new firebaseui.auth.AuthUI(firebase.auth());
+	ui.start('#firebaseui-auth-container', uiConfig);
+ }
+
 
 rhit.main();
