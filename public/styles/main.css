@@ -145,3 +145,11 @@ body {
     background-size: cover; 
     background-attachment: fixed;
 }
+
+#cheerUpPageQuote{
+    background-color: #a79f9f;
+    width: fit-content;
+    padding: 0 5px 0 5px;
+    margin: auto;
+
+}
