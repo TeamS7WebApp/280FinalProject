@@ -92,7 +92,7 @@ rhit.ElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyElement,
 		[rhit.FB_KEY_MOVIE]: otherHappyElement,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		[rhit.FB_KEY_AUTHOR]: rhit.fbAuthManager.uid,
+		//[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
 	})
 	.then(function(docRef){
 		console.log("Document written with ID: ", docRef.id);
@@ -195,6 +195,7 @@ rhit.SingleElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyText,
 		[rhit.FB_KEY_MOVIE]: otherHappyText,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
+		//[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
 	})
 	.then(() => {
 		console.log("Document updated successfully!");
@@ -383,6 +384,9 @@ rhit.LoginPageController = class{
  	 });
   
 	};
+	get uid() {
+		return this._user.uid;
+	}
 }
 
 rhit.IncineratorPageController = class {
