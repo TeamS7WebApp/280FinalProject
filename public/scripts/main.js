@@ -92,7 +92,7 @@ rhit.ElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyElement,
 		[rhit.FB_KEY_MOVIE]: otherHappyElement,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		//[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
+		// [rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
 	})
 	.then(function(docRef){
 		console.log("Document written with ID: ", docRef.id);
@@ -195,7 +195,7 @@ rhit.SingleElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyText,
 		[rhit.FB_KEY_MOVIE]: otherHappyText,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		//[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
+		// [rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
 	})
 	.then(() => {
 		console.log("Document updated successfully!");
@@ -388,6 +388,15 @@ rhit.LoginPageController = class{
 		return this._user.uid;
 	}
 }
+
+rhit.checkForRedirects = function() {
+	if(document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn){
+		window.location.href = "/list.html";
+	} 
+	if(!document.querySelector("#loginPage") && !rhit.fbAuthManager.isSignedIn){
+		window.location.href = "/";
+	} 
+};
 
 rhit.IncineratorPageController = class {
 	constructor(){
