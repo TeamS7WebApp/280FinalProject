@@ -103,7 +103,6 @@ rhit.ElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyElement,
 		[rhit.FB_KEY_MOVIE]: otherHappyElement,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		// [rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
 	})
 	.then(function(docRef){
 		console.log("Document written with ID: ", docRef.id);
@@ -127,6 +126,18 @@ rhit.ElementManager = class {
 			changeListener();
 		});
 	  }
+	// beginListening(changeListener) {  
+	// 	this._unsubscribe = this._ref.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc").limit(50).onSnapshot((querySnapshot) => {
+
+	// 		this._documentSnapshots = querySnapshot.docs;
+
+	// 		// querySnapshot.forEach((doc) => {
+	// 		// 	console.log(doc.data());
+	// 		// });
+
+	// 		changeListener();
+	// 	});
+	//   }
 	stopListening() {    
 		this._unsubscribe();
 	}
