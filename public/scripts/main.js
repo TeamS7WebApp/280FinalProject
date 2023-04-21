@@ -293,6 +293,7 @@ rhit.LoginPageController = class{
 			// Signed in
 			var user = userCredential.user;
 			console.log("Created user");
+			window.location.href = "/positivityTimeline.html";
 			// ...
 			})
 			.catch((error) => {
@@ -308,8 +309,10 @@ rhit.LoginPageController = class{
 			firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
 			.then((userCredential) => {
 				// Signed in
+				window.location.href = "/positivityTimeline.html";
 				console.log("Signed in", uid);
 				var user = userCredential.user;
+				
 				// ...
 			})
 			.catch((error) => {
