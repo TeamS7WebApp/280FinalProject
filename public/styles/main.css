@@ -3,20 +3,20 @@ body {
 }
 
 .navbar {
-    background-color: #FFB800;
+    background-color: #2e5240 ;
     color: white;
 }
 
 #inputPassword.form-control{
-    background-image: linear-gradient(0deg,#FFB800 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+    background-image: linear-gradient(0deg,#2e5240  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
 
 #inputEmail.form-control{
-    background-image: linear-gradient(0deg,#FFB800 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+    background-image: linear-gradient(0deg,#2e5240  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
 
 #inputnegative.form-control{
-    background-image: linear-gradient(0deg,#FFB800 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+    background-image: linear-gradient(0deg,#2e5240  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
 
 .page-container {
@@ -39,7 +39,7 @@ body {
     position: fixed;
     right: 10px;
     bottom: 10px;
-    background: #FFB800;
+    background: #2e5240 ;
     color: white;
     z-index: 999;
 }
@@ -103,7 +103,7 @@ body {
     text-align: center;
     color: rgb(0, 0, 0);
     font-weight: bold;
-    text-shadow: 1px 1px #FFB800;
+    text-shadow: 1px 1px #2e5240 ;
 }
 
 .bmd-layout-container{
@@ -111,7 +111,7 @@ body {
 }
 
 .bmd-layout-drawer>header {
-    background-color: #FFB800;
+    background-color: #2e5240 ;
     color: white;
 }
 
@@ -132,7 +132,7 @@ body {
     position: fixed;
     right: 10px;
     top: 10px;
-    background: #FFB800;
+    background: #2e5240 ;
     color: white;
     z-index: 999;
 }
