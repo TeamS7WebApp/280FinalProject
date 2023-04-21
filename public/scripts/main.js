@@ -5,6 +5,7 @@ rhit.FB_COLLECTION_MOVIEQUOTE = "TimelineEntries";
 rhit.FB_KEY_QUOTE = "text";
 rhit.FB_KEY_MOVIE = "text";
 rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
+rhit.FB_KEY_AUTHOR = 'author';
 rhit.fbMovieQuotesManager = null;
 rhit.fbSingleQuoteManager = null;
 rhit.MainPage = '/positivityTimeline.html';
@@ -80,7 +81,8 @@ rhit.TimelineElement = class {
 }
 
 rhit.ElementManager = class {
-	constructor() {
+	constructor(ID) {
+	  this._uid = ID;
 	  this._documentSnapshots = [];
 	  this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE);
 	  this._unsubscribe = null;
@@ -90,6 +92,7 @@ rhit.ElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyElement,
 		[rhit.FB_KEY_MOVIE]: otherHappyElement,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
+		[rhit.FB_KEY_AUTHOR]: rhit.fbAuthManager.uid,
 	})
 	.then(function(docRef){
 		console.log("Document written with ID: ", docRef.id);
@@ -99,8 +102,14 @@ rhit.ElementManager = class {
 	});
 
 	  }
-	beginListening(changeListener) {  
-		this._unsubscribe = this._ref.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc").limit(50).onSnapshot((querySnapshot) => {
+	  beginListening(changeListener) {  
+
+		let query = this._ref.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc").limit(50)
+		if(this._uid){
+			query = query.where(rhit.FB_KEY_AUTHOR, "==", this._uid);
+		}
+
+		this._unsubscribe = query.onSnapshot((querySnapshot) => {
 
 			this._documentSnapshots = querySnapshot.docs;
 
