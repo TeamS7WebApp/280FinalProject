@@ -441,6 +441,20 @@ rhit.IncineratorPageController = class {
 		};
 	}
 
+	allowDrop(ev) {
+		ev.preventDefault();
+	  }
+	  
+	drag(ev) {
+		ev.dataTransfer.setData("text", ev.target.id);
+	  }
+	  
+	drop(ev) {
+		ev.preventDefault();
+		ev.target.appendChild(document.getElementById("fire"));
+		document.querySelector("#inputnegative").innerHTML = "";
+	  }
+
 	signOut(){
 		firebase.auth().signOut().catch((error) => {
 			// An error happened.
