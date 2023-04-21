@@ -9,6 +9,7 @@ rhit.FB_KEY_AUTHOR = 'author';
 rhit.fbMovieQuotesManager = null;
 rhit.fbSingleQuoteManager = null;
 rhit.MainPage = '/positivityTimeline.html';
+rhit.loginController = null;
 
 //From stackoverflow
 function htmlToElement(html){
@@ -30,6 +31,10 @@ rhit.PositivityTimelineController = class {
 
 		});
 
+		document.querySelector("#menuSignOut").onclick = (event) => {
+			this.signOut();
+		};
+
 
 		$("#addQuoteDialog").on("show.bs.modal", (event) => {
 			document.querySelector("#inputQuote").value = "";
@@ -41,6 +46,12 @@ rhit.PositivityTimelineController = class {
 
 		//start listening
 		rhit.fbMovieQuotesManager.beginListening(this.updateList.bind(this));
+	}
+
+	signOut(){
+		firebase.auth().signOut().catch((error) => {
+			// An error happened.
+		  });
 	}
 
 
@@ -224,6 +235,16 @@ rhit.CheerUpPageController = class {
 		document.querySelector("#CheerUpButton").addEventListener("click", (event) => {
 			location.reload();
 		});
+
+		document.querySelector("#menuSignOut").onclick = (event) => {
+			this.signOut();
+		};
+	}
+
+	signOut(){
+		firebase.auth().signOut().catch((error) => {
+			// An error happened.
+		  });
 	}
 
 	getQuote(){
@@ -285,8 +306,15 @@ rhit.sideBarController = class {
 			window.location.href = "/CheerUp.html";
 		});
 		document.querySelector("#menuSignOut").addEventListener("click", (event) => {
+			// rhit.loginController.signOut();
 			window.location.href = "/";	//need to enable authentication to have logout method
 		});
+	}
+
+	signOut(){
+		firebase.auth().signOut().catch((error) => {
+			// An error happened.
+		  });
 	}
 }
 
@@ -370,6 +398,8 @@ rhit.LoginPageController = class{
 	  return;
 	}
 
+	
+
 	firebase.auth().signInWithCustomToken(rfUser.token).catch((error) => {
 			const errorCode = error.code;
 			const errorMessage = error.message;
@@ -387,6 +417,12 @@ rhit.LoginPageController = class{
 	get uid() {
 		return this._user.uid;
 	}
+
+	signOut(){
+		firebase.auth().signOut().catch((error) => {
+			// An error happened.
+		  });
+	};
 }
 
 rhit.checkForRedirects = function() {
@@ -400,7 +436,15 @@ rhit.checkForRedirects = function() {
 
 rhit.IncineratorPageController = class {
 	constructor(){
+		document.querySelector("#menuSignOut").onclick = (event) => {
+			this.signOut();
+		};
+	}
 
+	signOut(){
+		firebase.auth().signOut().catch((error) => {
+			// An error happened.
+		  });
 	}
 }
 
