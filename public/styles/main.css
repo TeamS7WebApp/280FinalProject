@@ -66,6 +66,11 @@ body {
     color: white;
     z-index: 999;
     width: 200px;
+    opacity: 1.0;
+}
+
+#fire:hover{
+    opacity: 0.5;
 }
 
 #listPage .card-title,#listPage .card-subtitle {
@@ -151,5 +156,4 @@ body {
     width: fit-content;
     padding: 0 5px 0 5px;
     margin: auto;
-
 }
