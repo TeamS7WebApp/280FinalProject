@@ -282,6 +282,7 @@ rhit.sideBarController = class {
 
 rhit.LoginPageController = class{
 	constructor(){
+		this._user = null;
 		const inputEmail = document.querySelector("#inputEmail");
    		const inputPassword = document.querySelector("#inputPassword");
 		rhit.startFirebaseUI();
@@ -324,6 +325,7 @@ rhit.LoginPageController = class{
 		
 		firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
+				this._user = user;
 				var uid = user.uid;
 				var displayName = user.displayName;
 				var email = user.email;
@@ -337,9 +339,41 @@ rhit.LoginPageController = class{
 			}
 		  });
 
-		
+		document.querySelector("#rosefireButton").onclick = (event) => {
+			this.signInRosefire();
+		};
 
 	}
+
+	get isSignedIn() {
+		return !!this._user;
+	}
+	get uid() {
+		return this._user.uid;
+	}
+
+	signInRosefire() {
+		console.log("Sign in reached with rosefire");
+	Rosefire.signIn("ea2c30dc-6d5f-44a2-8c08-6daaf8433dad", (err, rfUser) => {	//This has correct key for B+
+	if (err) {
+	  console.log("Rosefire error!", err);
+	  return;
+	}
+
+	firebase.auth().signInWithCustomToken(rfUser.token).catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			// console.log("Create user error", errorCode, errorMessage);
+			if(errorCode === 'auth/invalid-custom-token'){
+				alert('The token you provided is not valid');
+			} else{
+				console.error("custom auth error", errorCode, errorMessage);
+			}
+		});
+
+ 	 });
+  
+	};
 }
 
 rhit.IncineratorPageController = class {
