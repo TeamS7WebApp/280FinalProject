@@ -157,7 +157,8 @@ rhit.TimelineElementController = class {
 	constructor() {
 
 		document.querySelector("#submitEditQuote").addEventListener("click", (event) => {
-			const quote = document.querySelector("#inputQuote").happyText;
+			const quote = document.querySelector("#inputQuote").value;
+			// console.log(quote, "test here")
 			// const movie = document.querySelector("#inputMovie").value;
 			rhit.fbSingleQuoteManager.update(quote, quote);
 		});
