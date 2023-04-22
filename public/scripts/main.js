@@ -299,6 +299,10 @@ rhit.CheerUpPageController = class {
 				final2 += final[i];
 			}
 
+			if(final2 == "-:nul"){
+				final2 = "";
+			}
+
 			document.querySelector("#quoteTextCheerUp1").innerHTML = final2;
 
 		});

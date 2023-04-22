@@ -1,22 +1,27 @@
+:root {
+    --color-yellow: #FFB800;
+    --color-green: #2e5240;
+  }
+
 body {
     background: #DDDDDD;
 }
 
 .navbar {
-    background-color: #2e5240 ;
+    background-color: var(--color-green) ;
     color: white;
 }
 
 #inputPassword.form-control{
-    background-image: linear-gradient(0deg,#2e5240  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+    background-image: linear-gradient(0deg,var(--color-green)  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
 
 #inputEmail.form-control{
-    background-image: linear-gradient(0deg,#2e5240  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+    background-image: linear-gradient(0deg,var(--color-green)  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
 
 #inputnegative.form-control{
-    background-image: linear-gradient(0deg,#2e5240  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+    background-image: linear-gradient(0deg,var(--color-green)  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
 
 .page-container {
@@ -39,7 +44,7 @@ body {
     position: fixed;
     right: 10px;
     bottom: 10px;
-    background: #2e5240 ;
+    background: var(--color-green) ;
     color: white;
     z-index: 999;
 }
@@ -103,7 +108,7 @@ body {
     text-align: center;
     color: rgb(0, 0, 0);
     font-weight: bold;
-    text-shadow: 1px 1px #2e5240 ;
+    text-shadow: 1px 1px #ffffff ;
 }
 
 .bmd-layout-container{
@@ -111,7 +116,7 @@ body {
 }
 
 .bmd-layout-drawer>header {
-    background-color: #2e5240 ;
+    background-color: var(--color-green) ;
     color: white;
 }
 
@@ -132,7 +137,7 @@ body {
     position: fixed;
     right: 10px;
     top: 10px;
-    background: #2e5240 ;
+    background: var(--color-green) ;
     color: white;
     z-index: 999;
 }
@@ -159,3 +164,6 @@ body {
     margin: auto;
 }
 
+#CheerUpButton, #createAccountButton, #logInButton, #logInRosefire, #createAccountButtonDedicated{
+    background-color: #2e5240; color: white;
+}
