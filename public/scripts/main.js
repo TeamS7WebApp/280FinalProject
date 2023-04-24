@@ -10,6 +10,7 @@ rhit.fbMovieQuotesManager = null;
 rhit.fbSingleQuoteManager = null;
 rhit.MainPage = '/positivityTimeline.html';
 rhit.loginController = null;
+rhit.incineratorPageController = null;
 
 //From stackoverflow
 function htmlToElement(html){
@@ -456,18 +457,49 @@ rhit.IncineratorPageController = class {
 			this.signOut();
 		};
 
-		function onDragStart(event) {
-			event
-			  .dataTransfer
-			  .setData('text/plain', event.target.id);
-		  
-			event
-			  .currentTarget
-			  .style
-			  .backgroundColor = 'black';
-		  }
+		document.querySelector("#draggable-1").onDragStart = (event) => {
+			console.log("in onDragStart");
+		event
+		  .dataTransfer
+		  .setData('text/plain', event.target.id);
+	  
+		event
+		  .currentTarget
+		  .style
+		  .backgroundColor = 'black';
+		}
 	}
 
+	// onDragStart(event) {
+	// 	console.log("in onDragStart");
+	// 	event
+	// 	  .dataTransfer
+	// 	  .setData('text/plain', event.target.id);
+	  
+	// 	event
+	// 	  .currentTarget
+	// 	  .style
+	// 	  .backgroundColor = 'black';
+	//   }
+
+	  onDragOver(event) {
+		event.preventDefault();
+	  }
+
+	  onDrop(event) {
+		const id = event
+		  .dataTransfer
+		  .getData('text');
+
+		  const draggableElement = document.getElementById(id);
+		  const dropzone = event.target;
+		  dropzone.appendChild(draggableElement);
+
+		  
+		  event
+		  .dataTransfer
+		  .clearData();
+	  }
 
 
 	// allowDrop(ev) {
@@ -529,6 +561,11 @@ rhit.main = function () {
 	if(document.querySelector("#dw-s2")){
 		rhit.sideController = new rhit.sideBarController();
 		console.log("Side bar controller created");
+	}
+
+	if(document.querySelector("#negativityIncinerator")){
+		rhit.incineratorPageController = new rhit.IncineratorPageController();
+		console.log("incinerator page controller created");
 	}
 
 	if(document.querySelector("#mainPage")){
