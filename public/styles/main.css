@@ -8,8 +8,10 @@
     --color-blue-light:  #5fb1e9;
     --color-pink: #d37880;
     --color-pink-light: #e4b3b3;
-    --theme-color: var(--color-blue);
-    --theme-color-light: var(--color-blue-light);
+    --color-purple:  #2d123a;
+    --color-purple-light: #53216b;
+    --theme-color: var(--color-purple);
+    --theme-color-light: var(--color-purple-light);
   }
 
 body {
