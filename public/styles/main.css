@@ -180,3 +180,10 @@ body {
 #inputnegative{
     text-align: center;
 }
+
+#backgroundImage{
+    background-image: url("../images/pink_back.jpg"); 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-attachment: fixed;
+}
