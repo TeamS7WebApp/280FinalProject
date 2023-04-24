@@ -1,6 +1,7 @@
 :root {
     --color-yellow: #FFB800;
     --color-green: #2e5240;
+    --color-green-light: #849c74;
   }
 
 body {
@@ -64,7 +65,7 @@ body {
 .negInc{
     color: #ffffff;
     text-shadow: 100px;
-    background-color: var(--color-green);
+    background-color: var(--color-green-light);
 }
 
 #fire{
