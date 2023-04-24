@@ -175,7 +175,7 @@ body {
 }
 
 #backgroundImage{
-    background-image: url("../images/blue_back.jpg"); 
+    background-image: url("../images/purple_back.jpg"); 
     background-repeat: no-repeat; 
     background-size: cover; 
     background-attachment: fixed;
