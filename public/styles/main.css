@@ -157,10 +157,6 @@ body {
     height: 100vh;
 }
 
-.background{
-    background-image: url('img_girl.jpg');
-}
-
 #cheerUpPageQuote{
     background-color: #a79f9f62;
     width: fit-content;
