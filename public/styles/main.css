@@ -159,13 +159,6 @@ body {
     background-image: url('img_girl.jpg');
 }
 
-.background_image{
-    background-image: url('images/test_back.jpg'); 
-    background-repeat: no-repeat; 
-    background-size: cover; 
-    background-attachment: fixed;
-}
-
 #cheerUpPageQuote{
     background-color: #a79f9f62;
     width: fit-content;
