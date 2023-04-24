@@ -2,6 +2,10 @@
     --color-yellow: #FFB800;
     --color-green: #2e5240;
     --color-green-light: #849c74;
+    --color-red: #a8383e;
+    --color-red-light:  #f5685f;
+    --color-blue: #0c97e8;
+    --color-blue-light:  #5fb1e9;
   }
 
 body {
