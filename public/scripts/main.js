@@ -275,8 +275,37 @@ rhit.CheerUpPageController = class {
 
 	reloadData(){
 		document.querySelector("#quoteTextCheerUp").innerHTML = this.getQuote();
-		document.getElementById("cheerUpImage").src=`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`;
 
+		let dataImage = localStorage.getItem('image');
+
+		if(dataImage == null){
+			document.getElementById("cheerUpImage").src=`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`;
+		}else {
+			console.log("working???");
+			let bannerImg = document.getElementById("cheerUpImage");
+			bannerImg.src = "data:image/png;base64," + dataImage;
+		}
+
+		
+		
+
+		// document.getElementById("cheerUpImage").src=`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`;
+
+		// bannerImage = document.getElementById("cheerUpImage");
+		
+	}
+
+	getBase64Image(img) {
+		var canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+	
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0);
+	
+		var dataURL = canvas.toDataURL("image/png");
+	
+		return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 	}
 
 	signOut(){
@@ -488,61 +517,41 @@ rhit.checkForRedirects = function() {
 
 rhit.SettingsPageController = class {
 	constructor(){
-		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
-		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		this.changeTheme(localStorage.getItem("theme"));
 
 		document.querySelector("#greenTheme").onclick = (event) => {
 			localStorage.setItem("theme", "green");
-			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
-			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+			this.changeTheme("green");
 			
 		};
 		document.querySelector("#blueTheme").onclick = (event) => {
 			localStorage.setItem("theme", "blue");
-			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
-			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+			this.changeTheme("blue");
 		};
 		document.querySelector("#orangeTheme").onclick = (event) => {
 			localStorage.setItem("theme", "orange");
-			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
-			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+			this.changeTheme("orange");
 		};
 		document.querySelector("#purpleTheme").onclick = (event) => {
 			localStorage.setItem("theme", "purple");
-			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
-			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+			this.changeTheme("purple");
 		};
 		document.querySelector("#pinkTheme").onclick = (event) => {
 			localStorage.setItem("theme", "pink");
-			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
-			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+			this.changeTheme("pink");
 		};
 		document.querySelector("#redTheme").onclick = (event) => {
 			localStorage.setItem("theme", "red");
-			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
-			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+			this.changeTheme("red");
 		};
+	}
+
+	changeTheme(aaaatheme){
+		let r = document.querySelector(':root');
+			r.style.setProperty('--theme-color', `var(--color-${aaaatheme})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${aaaatheme}-light)`);
+			let b = document.querySelector('#backgroundImage');
+			b.style.setProperty('background-image', `url("../images/${aaaatheme}_back.jpg")`);
 	}
 }
 
