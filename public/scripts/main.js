@@ -11,6 +11,7 @@ rhit.fbSingleQuoteManager = null;
 rhit.MainPage = '/positivityTimeline.html';
 rhit.loginController = null;
 rhit.incineratorPageController = null;
+rhit.themeChoice = null;
 let themeColor;
 let mainColor;
 let defaultColor = "green";
@@ -55,10 +56,10 @@ rhit.PositivityTimelineController = class {
 		rhit.fbMovieQuotesManager.beginListening(this.updateList.bind(this));
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 	}
 
 	signOut(){
@@ -198,10 +199,10 @@ rhit.TimelineElementController = class {
 		rhit.fbSingleQuoteManager.beginListening(this.updateView.bind(this));
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 	}
 	updateView() {  
 		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleQuoteManager.happyText;
@@ -274,10 +275,10 @@ rhit.CheerUpPageController = class {
 		};
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 	}
 
 	signOut(){
@@ -369,10 +370,10 @@ rhit.LoginPageController = class{
 		themeColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 
 		this._user = null;
 		const inputEmail = document.querySelector("#inputEmail");
@@ -494,72 +495,78 @@ rhit.SettingsPageController = class {
 		mainColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${mainColor})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${mainColor}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${mainColor}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 
 		document.querySelector("#greenTheme").onclick = (event) => {
 			themeColor = "green";
 			this.setThemeColor("green");
 			localStorage.setItem("themeColor", themeColor);
+			rhit.themeChoice.setTheme("green");
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 			
 		};
 		document.querySelector("#blueTheme").onclick = (event) => {
+			rhit.themeChoice.setTheme("blue");
 			themeColor = "blue";
 			window.name = "blue";
 			this.setThemeColor("blue");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 		};
 		document.querySelector("#orangeTheme").onclick = (event) => {
+			rhit.themeChoice.setTheme("orange");
 			themeColor = "orange";
 			this.setThemeColor("orange");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 		};
 		document.querySelector("#purpleTheme").onclick = (event) => {
+			rhit.themeChoice.setTheme("purple");
 			themeColor = "purple";
 			this.setThemeColor("purple");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 		};
 		document.querySelector("#pinkTheme").onclick = (event) => {
+			rhit.themeChoice.setTheme("pink");
 			themeColor = "pink";
 			this.setThemeColor("pink");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 		};
 		document.querySelector("#redTheme").onclick = (event) => {
+			rhit.themeChoice.setTheme("red");
 			themeColor = "red";
 			this.setThemeColor("red");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
 		};
 	}
 
@@ -572,15 +579,29 @@ rhit.SettingsPageController = class {
 	}
 }
 
-rhit.IncineratorPageController = class {
+rhit.ThemeChoice = class {
 	constructor(){
+		let theme = "";
+	}
+	setTheme(color){
+		this.theme = color;
+	}
+	getTheme(){
+		return this.theme;
+	}
+}
+
+rhit.IncineratorPageController = class {
+	constructor(themeControllerClass){
 		themeColor = localStorage.getItem("themeColor");
 
+		let colorChoice = themeControllerClass.getTheme();
+
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${window.name})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${colorChoice})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${colorChoice}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${colorChoice}_back.jpg")`);
 
 		document.querySelector("#menuSignOut").onclick = (event) => {
 			this.signOut();
@@ -661,6 +682,9 @@ rhit.main = function () {
 	let storedThemeVar = themeColor;
 	localStorage.setItem("storedThemeVar", storedThemeVar);
 
+	rhit.themeChoice = new rhit.ThemeChoice();
+	rhit.themeChoice.setTheme("blue");
+
 	if(document.querySelector("#QuotePage")){
 		console.log("list page");
 		rhit.fbMovieQuotesManager = new rhit.ElementManager();
@@ -697,7 +721,7 @@ rhit.main = function () {
 	}
 
 	if(document.querySelector("#negativityIncinerator")){
-		rhit.incineratorPageController = new rhit.IncineratorPageController();
+		rhit.incineratorPageController = new rhit.IncineratorPageController(rhit.themeChoice);
 		console.log("incinerator page controller created");
 	}
 
