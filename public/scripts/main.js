@@ -258,7 +258,8 @@ rhit.CheerUpPageController = class {
 		// console.log(this.getQuote());
 		console.log(document.querySelector("#quoteTextCheerUp").innerHTML);
 		document.querySelector("#CheerUpButton").addEventListener("click", (event) => {
-			location.reload();
+			// location.reload();
+			this.reloadData();
 		});
 
 		document.querySelector("#menuSignOut").onclick = (event) => {
@@ -270,6 +271,12 @@ rhit.CheerUpPageController = class {
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
 		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+	}
+
+	reloadData(){
+		document.querySelector("#quoteTextCheerUp").innerHTML = this.getQuote();
+		document.getElementById("cheerUpImage").src=`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`;
+
 	}
 
 	signOut(){
