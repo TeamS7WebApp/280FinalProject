@@ -11,6 +11,7 @@ rhit.fbSingleQuoteManager = null;
 rhit.MainPage = '/positivityTimeline.html';
 rhit.loginController = null;
 rhit.incineratorPageController = null;
+let themeColor;
 
 //From stackoverflow
 function htmlToElement(html){
@@ -47,6 +48,12 @@ rhit.PositivityTimelineController = class {
 
 		//start listening
 		rhit.fbMovieQuotesManager.beginListening(this.updateList.bind(this));
+
+		let r = document.querySelector(':root');
+		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		let b = document.querySelector('#backgroundImage');
+		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
 	}
 
 	signOut(){
@@ -183,6 +190,12 @@ rhit.TimelineElementController = class {
 		});
 
 		rhit.fbSingleQuoteManager.beginListening(this.updateView.bind(this));
+
+		let r = document.querySelector(':root');
+		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		let b = document.querySelector('#backgroundImage');
+		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
 	}
 	updateView() {  
 		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleQuoteManager.happyText;
@@ -252,6 +265,12 @@ rhit.CheerUpPageController = class {
 		document.querySelector("#menuSignOut").onclick = (event) => {
 			this.signOut();
 		};
+
+		let r = document.querySelector(':root');
+		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		let b = document.querySelector('#backgroundImage');
+		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
 	}
 
 	signOut(){
@@ -326,6 +345,9 @@ rhit.sideBarController = class {
 			// rhit.loginController.signOut();
 			window.location.href = "/";	//need to enable authentication to have logout method
 		});
+		document.querySelector("#menuSettings").addEventListener("click", (event) => {
+			window.location.href = "/settings.html";	
+		});
 	}
 
 	signOut(){
@@ -337,6 +359,13 @@ rhit.sideBarController = class {
 
 rhit.LoginPageController = class{
 	constructor(){
+
+		let r = document.querySelector(':root');
+		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		let b = document.querySelector('#backgroundImage');
+		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+
 		this._user = null;
 		const inputEmail = document.querySelector("#inputEmail");
    		const inputPassword = document.querySelector("#inputPassword");
@@ -451,8 +480,76 @@ rhit.checkForRedirects = function() {
 	} 
 };
 
+rhit.SettingsPageController = class {
+	constructor(){
+
+		let r = document.querySelector(':root');
+		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		let b = document.querySelector('#backgroundImage');
+		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+
+		document.querySelector("#greenTheme").onclick = (event) => {
+			themeColor = "green";
+			let r = document.querySelector(':root');
+			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			let b = document.querySelector('#backgroundImage');
+			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+			
+		};
+		document.querySelector("#blueTheme").onclick = (event) => {
+			themeColor = "blue";
+			let r = document.querySelector(':root');
+			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			let b = document.querySelector('#backgroundImage');
+			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		};
+		document.querySelector("#orangeTheme").onclick = (event) => {
+			themeColor = "orange";
+			let r = document.querySelector(':root');
+			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			let b = document.querySelector('#backgroundImage');
+			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		};
+		document.querySelector("#purpleTheme").onclick = (event) => {
+			themeColor = "purple";
+			let r = document.querySelector(':root');
+			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			let b = document.querySelector('#backgroundImage');
+			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		};
+		document.querySelector("#pinkTheme").onclick = (event) => {
+			themeColor = "pink";
+			let r = document.querySelector(':root');
+			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			let b = document.querySelector('#backgroundImage');
+			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		};
+		document.querySelector("#redTheme").onclick = (event) => {
+			themeColor = "red";
+			let r = document.querySelector(':root');
+			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+			let b = document.querySelector('#backgroundImage');
+			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		};
+	}
+}
+
 rhit.IncineratorPageController = class {
 	constructor(){
+
+		let r = document.querySelector(':root');
+		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		let b = document.querySelector('#backgroundImage');
+		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+
 		document.querySelector("#menuSignOut").onclick = (event) => {
 			this.signOut();
 		};
@@ -527,6 +624,7 @@ rhit.IncineratorPageController = class {
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
+	themeColor = "green"; //green is now default because i say so
 
 	if(document.querySelector("#QuotePage")){
 		console.log("list page");
@@ -574,7 +672,14 @@ rhit.main = function () {
 		console.log("Login page controller created")
 	}
 
+	if(document.querySelector("#settingsPage")){
+		console.log("settings page");
+		rhit.settingsController = new rhit.SettingsPageController();
+		console.log("setting page controller created")
+	}
+
 };
+
 
 rhit.startFirebaseUI = function() {		//used for firebase authentication ui
 	var uiConfig = {
