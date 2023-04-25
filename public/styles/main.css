@@ -12,8 +12,9 @@
     --color-purple-light: #53216b;
     --color-orange: #ff9100;
     --color-orange-light: #daa049;
-    --theme-color: var(--color-green);
-    --theme-color-light: var(--color-green-light);
+    --color-white: #ffff;
+    --theme-color: var(--color-white);
+    --theme-color-light: var(--color-white);
   }
 
 body {
@@ -179,7 +180,7 @@ body {
 }
 
 #backgroundImage{
-    background-image: url("../images/green_back.jpg"); 
+    background-image: url("../images/LiterallyAWhiteScreen.png"); 
     background-repeat: no-repeat; 
     background-size: cover; 
     background-attachment: fixed;
