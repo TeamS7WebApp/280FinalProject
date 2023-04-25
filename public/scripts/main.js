@@ -356,7 +356,7 @@ rhit.CheerUpPageController = class {
 			}
 
 			if(final2 == "-:nul"){
-				final2 = "Your Mom";
+				final2 = "-Unknown";
 			}
 
 			document.querySelector("#quoteTextCheerUp1").innerHTML = final2;
