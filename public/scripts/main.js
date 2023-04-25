@@ -538,11 +538,16 @@ rhit.SettingsPageController = class {
 			let b = document.querySelector('#backgroundImage');
 			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
 		};
+
+		let storedThemeVar = themeColor;
+		localStorage.setItem("storedThemeVar", storedThemeVar);
 	}
 }
 
 rhit.IncineratorPageController = class {
 	constructor(){
+		let storedThemeVar = localStorage.getItem("storedThemeVar");
+		themeColor = storedThemeVar;
 
 		let r = document.querySelector(':root');
 		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -625,6 +630,9 @@ rhit.IncineratorPageController = class {
 rhit.main = function () {
 	console.log("Ready");
 	themeColor = "green"; //green is now default because i say so
+
+	let storedThemeVar = themeColor;
+	localStorage.setItem("storedThemeVar", storedThemeVar);
 
 	if(document.querySelector("#QuotePage")){
 		console.log("list page");
