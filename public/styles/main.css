@@ -10,6 +10,8 @@
     --color-pink-light: #e4b3b3;
     --color-purple:  #2d123a;
     --color-purple-light: #53216b;
+    --color-orange: #ff9100;
+    --color-orange-light: #daa049;
     --theme-color: var(--color-green);
     --theme-color-light: var(--color-green-light);
   }

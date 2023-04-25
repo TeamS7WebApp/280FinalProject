@@ -495,78 +495,84 @@ rhit.SettingsPageController = class {
 		mainColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 
 		document.querySelector("#greenTheme").onclick = (event) => {
 			themeColor = "green";
+			window.name = "green";
 			this.setThemeColor("green");
-			localStorage.setItem("themeColor", themeColor);
+			localStorage.setItem("themeColor", "green");
 			rhit.themeChoice.setTheme("green");
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 			
 		};
 		document.querySelector("#blueTheme").onclick = (event) => {
 			rhit.themeChoice.setTheme("blue");
+			window.name = "blue";
 			themeColor = "blue";
 			window.name = "blue";
 			this.setThemeColor("blue");
-			localStorage.setItem("themeColor", themeColor);
+			localStorage.setItem("themeColor", "blue");
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 		};
 		document.querySelector("#orangeTheme").onclick = (event) => {
 			rhit.themeChoice.setTheme("orange");
+			window.name = "orange";
 			themeColor = "orange";
 			this.setThemeColor("orange");
-			localStorage.setItem("themeColor", themeColor);
+			localStorage.setItem("themeColor", "orange");
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 		};
 		document.querySelector("#purpleTheme").onclick = (event) => {
 			rhit.themeChoice.setTheme("purple");
+			window.name = "purple";
 			themeColor = "purple";
 			this.setThemeColor("purple");
-			localStorage.setItem("themeColor", themeColor);
+			localStorage.setItem("themeColor", "purple");
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 		};
 		document.querySelector("#pinkTheme").onclick = (event) => {
 			rhit.themeChoice.setTheme("pink");
+			window.name = "pink";
 			themeColor = "pink";
 			this.setThemeColor("pink");
-			localStorage.setItem("themeColor", themeColor);
+			localStorage.setItem("themeColor", "pink");
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 		};
 		document.querySelector("#redTheme").onclick = (event) => {
 			rhit.themeChoice.setTheme("red");
+			window.name = "red";
 			themeColor = "red";
 			this.setThemeColor("red");
-			localStorage.setItem("themeColor", themeColor);
+			localStorage.setItem("themeColor", "red");
 			let r = document.querySelector(':root');
-			r.style.setProperty('--theme-color', `var(--color-${rhit.themeChoice.getTheme()})`);
-			r.style.setProperty('--theme-color-light', `var(--color-${rhit.themeChoice.getTheme()}-light)`);
+			r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+			r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${rhit.themeChoice.getTheme()}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 		};
 	}
 
@@ -598,10 +604,10 @@ rhit.IncineratorPageController = class {
 		let colorChoice = themeControllerClass.getTheme();
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${colorChoice})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${colorChoice}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("themeColor")})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("themeColor")}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${colorChoice}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("themeColor")}_back.jpg")`);
 
 		document.querySelector("#menuSignOut").onclick = (event) => {
 			this.signOut();
@@ -679,8 +685,12 @@ rhit.main = function () {
 	console.log("Ready");
 	
 
-	let storedThemeVar = themeColor;
-	localStorage.setItem("storedThemeVar", storedThemeVar);
+	window.name = localStorage.getItem(themeColor);
+
+	if(window.name != "green" && window.name != "blue" && window.name != "purple" && window.name != "red" && window.name != "pink" && window.name != "orange"){
+		window.name = "green";
+		localStorage.setItem("themeColor", "green");
+	}
 
 	rhit.themeChoice = new rhit.ThemeChoice();
 	rhit.themeChoice.setTheme("blue");
