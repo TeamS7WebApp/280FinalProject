@@ -23,6 +23,7 @@ function htmlToElement(html){
 
 rhit.PositivityTimelineController = class {
 	constructor() {
+		themeColor = localStorage.getItem("themeColor");
 
 		document.querySelector("#submitAddQuote").addEventListener("click",(event) => {
 			const quote = document.querySelector("#inputQuote").value;
@@ -163,6 +164,7 @@ rhit.ElementManager = class {
 
 rhit.TimelineElementController = class {
 	constructor() {
+		themeColor = localStorage.getItem("themeColor");
 
 		document.querySelector("#submitEditQuote").addEventListener("click", (event) => {
 			const quote = document.querySelector("#inputQuote").value;
@@ -255,6 +257,7 @@ rhit.SingleElementManager = class {
 
 rhit.CheerUpPageController = class {
 	constructor(){
+		themeColor = localStorage.getItem("themeColor");
 		document.querySelector("#quoteTextCheerUp").innerHTML = this.getQuote();
 		// console.log(this.getQuote());
 		console.log(document.querySelector("#quoteTextCheerUp").innerHTML);
@@ -359,6 +362,7 @@ rhit.sideBarController = class {
 
 rhit.LoginPageController = class{
 	constructor(){
+		themeColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
 		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -482,6 +486,7 @@ rhit.checkForRedirects = function() {
 
 rhit.SettingsPageController = class {
 	constructor(){
+		themeColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
 		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -491,6 +496,7 @@ rhit.SettingsPageController = class {
 
 		document.querySelector("#greenTheme").onclick = (event) => {
 			themeColor = "green";
+			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
 			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
@@ -500,6 +506,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#blueTheme").onclick = (event) => {
 			themeColor = "blue";
+			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
 			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
@@ -508,6 +515,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#orangeTheme").onclick = (event) => {
 			themeColor = "orange";
+			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
 			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
@@ -516,6 +524,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#purpleTheme").onclick = (event) => {
 			themeColor = "purple";
+			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
 			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
@@ -524,6 +533,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#pinkTheme").onclick = (event) => {
 			themeColor = "pink";
+			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
 			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
@@ -532,22 +542,20 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#redTheme").onclick = (event) => {
 			themeColor = "red";
+			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
 			r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
 			let b = document.querySelector('#backgroundImage');
 			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
 		};
-
-		let storedThemeVar = themeColor;
-		localStorage.setItem("storedThemeVar", storedThemeVar);
+		
 	}
 }
 
 rhit.IncineratorPageController = class {
 	constructor(){
-		let storedThemeVar = localStorage.getItem("storedThemeVar");
-		themeColor = storedThemeVar;
+		themeColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
 		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -630,6 +638,7 @@ rhit.IncineratorPageController = class {
 rhit.main = function () {
 	console.log("Ready");
 	themeColor = "green"; //green is now default because i say so
+	localStorage.setItem("themeColor", themeColor);
 
 	let storedThemeVar = themeColor;
 	localStorage.setItem("storedThemeVar", storedThemeVar);
