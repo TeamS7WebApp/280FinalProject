@@ -12,6 +12,10 @@ rhit.MainPage = '/positivityTimeline.html';
 rhit.loginController = null;
 rhit.incineratorPageController = null;
 let themeColor;
+let mainColor;
+let defaultColor = "green";
+window.name = "green";
+localStorage.setItem("themeColor", defaultColor);
 
 //From stackoverflow
 function htmlToElement(html){
@@ -487,15 +491,17 @@ rhit.checkForRedirects = function() {
 rhit.SettingsPageController = class {
 	constructor(){
 		themeColor = localStorage.getItem("themeColor");
+		mainColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${mainColor})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${mainColor}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${mainColor}_back.jpg")`);
 
 		document.querySelector("#greenTheme").onclick = (event) => {
 			themeColor = "green";
+			this.setThemeColor("green");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -506,6 +512,8 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#blueTheme").onclick = (event) => {
 			themeColor = "blue";
+			window.name = "blue";
+			this.setThemeColor("blue");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -515,6 +523,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#orangeTheme").onclick = (event) => {
 			themeColor = "orange";
+			this.setThemeColor("orange");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -524,6 +533,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#purpleTheme").onclick = (event) => {
 			themeColor = "purple";
+			this.setThemeColor("purple");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -533,6 +543,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#pinkTheme").onclick = (event) => {
 			themeColor = "pink";
+			this.setThemeColor("pink");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -542,6 +553,7 @@ rhit.SettingsPageController = class {
 		};
 		document.querySelector("#redTheme").onclick = (event) => {
 			themeColor = "red";
+			this.setThemeColor("red");
 			localStorage.setItem("themeColor", themeColor);
 			let r = document.querySelector(':root');
 			r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
@@ -549,7 +561,14 @@ rhit.SettingsPageController = class {
 			let b = document.querySelector('#backgroundImage');
 			b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
 		};
-		
+	}
+
+	setThemeColor(color){
+		this.mainColor = color;
+	}
+
+	getThemeColor(){
+		return this.mainColor;
 	}
 }
 
@@ -558,10 +577,10 @@ rhit.IncineratorPageController = class {
 		themeColor = localStorage.getItem("themeColor");
 
 		let r = document.querySelector(':root');
-		r.style.setProperty('--theme-color', `var(--color-${themeColor})`);
-		r.style.setProperty('--theme-color-light', `var(--color-${themeColor}-light)`);
+		r.style.setProperty('--theme-color', `var(--color-${window.name})`);
+		r.style.setProperty('--theme-color-light', `var(--color-${window.name}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${themeColor}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${window.name}_back.jpg")`);
 
 		document.querySelector("#menuSignOut").onclick = (event) => {
 			this.signOut();
@@ -637,8 +656,7 @@ rhit.IncineratorPageController = class {
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
-	themeColor = "green"; //green is now default because i say so
-	localStorage.setItem("themeColor", themeColor);
+	
 
 	let storedThemeVar = themeColor;
 	localStorage.setItem("storedThemeVar", storedThemeVar);
