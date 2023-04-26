@@ -640,7 +640,7 @@ rhit.IncineratorPageController = class {
 rhit.main = function () {
 	console.log("Ready");
 	if(localStorage.getItem("theme") == null){
-		localStorage.setItem("theme","red");
+		localStorage.setItem("theme","green");
 	}else{
 		console.log("storage is not null");
 	}

@@ -180,6 +180,7 @@ body {
 }
 
 #backgroundImage{
+    /* overflow: visible; */
     background-image: url("../images/LiterallyAWhiteScreen.png"); 
     background-repeat: no-repeat; 
     background-size: cover; 
