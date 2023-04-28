@@ -173,6 +173,19 @@ body {
     margin: auto;
 }
 
+#deleteAccountButton{
+    background-color: var(--color-red);
+    color: white;
+}
+
+#deleteAccountDiv{
+    position: relative;
+    display: inline-block;
+    width: 200px;
+        /* border: 1px solid #ff1100; */
+        /* text-align: right; */
+}
+
 #CheerUpButton, #createAccountButton, #logInButton, #logInRosefire, #createAccountButtonDedicated{
     background-color: var(--theme-color); color: white;
 }
