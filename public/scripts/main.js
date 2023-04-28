@@ -579,14 +579,19 @@ rhit.IncineratorPageController = class {
 
 		document.querySelector("#draggable-1").onDragStart = (event) => {
 			console.log("in onDragStart");
-		event
-		  .dataTransfer
-		  .setData('text/plain', event.target.id);
+		// event
+		//   .dataTransfer
+		//   .setData('text/plain', event.target.id);
+
+		// event
+		// 	.dataTransfer
+		//     .clearData();
 	  
 		event
 		  .currentTarget
 		  .style
 		  .backgroundColor = 'black';
+		//   .clearData();
 		}
 	}
 
@@ -602,9 +607,9 @@ rhit.IncineratorPageController = class {
 	// 	  .backgroundColor = 'black';
 	//   }
 
-	  onDragOver(event) {
-		event.preventDefault();
-	  }
+	//   onDragOver(event) {
+	// 	event.preventDefault();
+	//   }
 
 	  onDrop(event) {
 		const id = event
