@@ -256,7 +256,7 @@ rhit.CheerUpPageController = class {
 	constructor(){
 		document.querySelector("#quoteTextCheerUp").innerHTML = this.getQuote();
 		// console.log(this.getQuote());
-		console.log(document.querySelector("#quoteTextCheerUp").innerHTML);
+		// console.log(document.querySelector("#quoteTextCheerUp").innerHTML);
 		document.querySelector("#CheerUpButton").addEventListener("click", (event) => {
 			// location.reload();
 			this.reloadData();
@@ -579,67 +579,35 @@ rhit.IncineratorPageController = class {
 
 		document.querySelector("#draggable-1").onDragStart = (event) => {
 			console.log("in onDragStart");
-		// event
-		//   .dataTransfer
-		//   .setData('text/plain', event.target.id);
-
-		// event
-		// 	.dataTransfer
-		//     .clearData();
-	  
-		event
-		  .currentTarget
-		  .style
-		  .backgroundColor = 'black';
-		//   .clearData();
+			document.querySelector('#innerInput').innerHTML = "";
+			document.querySelector('#innerInput').innerHTML = `<input type="negative" id="inputnegative" class="form-control" />`;
 		}
+
+		const drag = document.querySelector('#draggable-1');
+		drag.addEventListener("drop", (event) => {
+			event.preventDefault();
+			console.log("got here");
+		});
+		
 	}
 
-	// onDragStart(event) {
-	// 	console.log("in onDragStart");
-	// 	event
-	// 	  .dataTransfer
-	// 	  .setData('text/plain', event.target.id);
+	drop(ev) {
+		ev.preventDefault();
+
+		console.log("got here");
 	  
-	// 	event
-	// 	  .currentTarget
-	// 	  .style
-	// 	  .backgroundColor = 'black';
-	//   }
-
-	//   onDragOver(event) {
-	// 	event.preventDefault();
-	//   }
-
-	  onDrop(event) {
-		const id = event
-		  .dataTransfer
-		  .getData('text');
-
-		  const draggableElement = document.getElementById(id);
-		  const dropzone = event.target;
-		  dropzone.appendChild(draggableElement);
-
-		  
-		  event
-		  .dataTransfer
-		  .clearData();
+		const data = ev.dataTransfer.getData("text");
+	  
+		const element = document.getElementById(data);
+	  
+		ev.target.appendChild(element);
+	  
+		console.log(`${data} in ${ev.target.id}`);
 	  }
 
-
-	// allowDrop(ev) {
-	// 	ev.preventDefault();
-	//   }
-	  
-	// drag(ev) {
-	// 	ev.dataTransfer.setData("text", ev.target.id);
-	//   }
-	  
-	// drop(ev) {
-	// 	ev.preventDefault();
-	// 	ev.target.appendChild(document.getElementById("fire"));
-	// 	document.querySelector("#inputnegative").innerHTML = "";
-	//   }
+	handleDrop(){
+		
+	}
 
 	signOut(){
 		firebase.auth().signOut().catch((error) => {
