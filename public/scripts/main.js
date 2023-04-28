@@ -333,6 +333,14 @@ rhit.CheerUpPageController = class {
 				}
 				final += curIndex[i];
 			}
+			if(final == "undefined"){
+				for(let i = 9; i < curIndex.length; i++){		
+					if(curIndex[i] == '"'){						
+						break;
+					}
+					final += curIndex[i];
+				}
+			}
 			document.querySelector("#quoteTextCheerUp").innerHTML = final;
 
 			final = "";
