@@ -552,6 +552,12 @@ rhit.SettingsPageController = class {
 			localStorage.setItem("theme", "red");
 			this.changeTheme("red");
 		};
+
+		document.querySelector('#deleteAccountButton').onclick = (event) => {
+			firebase.auth.removeUser(rhit.loginController.uid);
+			document.location.href = "/";
+
+		}
 	}
 
 	changeTheme(aaaatheme){
