@@ -79,6 +79,7 @@ body {
     color: #ffffff;
     text-shadow: 100px;
     background-color: var(--theme-color-light);
+    border-radius: 16px;
 }
 
 #fire{
@@ -103,12 +104,14 @@ body {
     display: block;
     text-overflow: ellipsis;
     margin: 4px 4px 4px 4px;
+
 }
 
 .card{
     margin: 10px 10px 10px 10px;
     background-color: var(--theme-color-light);
     color: white;
+    border-radius: 16px;
 }
 
 #cardQuote{
@@ -187,7 +190,7 @@ body {
 }
 
 #CheerUpButton, #createAccountButton, #logInButton, #logInRosefire, #createAccountButtonDedicated{
-    background-color: var(--theme-color); color: white;
+    background-color: var(--theme-color); color: white; border-radius: 16px;
 }
 
 #inputnegative{
