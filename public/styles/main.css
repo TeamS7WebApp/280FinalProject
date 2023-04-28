@@ -179,6 +179,8 @@ body {
 #deleteAccountButton{
     background-color: var(--color-red);
     color: white;
+    border-radius: 16px;
+
 }
 
 #deleteAccountDiv{
