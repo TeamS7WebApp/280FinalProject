@@ -468,7 +468,7 @@ rhit.LoginPageController = class{
 			}
 		  });
 
-		document.querySelector("#rosefireButton").onclick = (event) => {
+		document.querySelector("#logInRosefire").onclick = (event) => {
 			this.signInRosefire();
 		};
 
