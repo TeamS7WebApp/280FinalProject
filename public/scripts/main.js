@@ -110,6 +110,7 @@ rhit.ElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyElement,
 		[rhit.FB_KEY_MOVIE]: otherHappyElement,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
+		[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
 	})
 	.then(function(docRef){
 		console.log("Document written with ID: ", docRef.id);
@@ -231,7 +232,7 @@ rhit.SingleElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyText,
 		[rhit.FB_KEY_MOVIE]: otherHappyText,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		// [rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
+		[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
 	})
 	.then(() => {
 		console.log("Document updated successfully!");
@@ -440,6 +441,7 @@ rhit.LoginPageController = class{
 				window.location.href = "/positivityTimeline.html";
 				console.log("Signed in", uid);
 				var user = userCredential.user;
+				// this._user.uid = userCredential.user.uid;
 				
 				// ...
 			})
@@ -475,9 +477,9 @@ rhit.LoginPageController = class{
 	get isSignedIn() {
 		return !!this._user;
 	}
-	get uid() {
-		return this._user.uid;
-	}
+	// get uid() {
+	// 	return this._user.uid;
+	// }
 
 	signInRosefire() {
 		console.log("Sign in reached with rosefire");
