@@ -8,7 +8,7 @@ rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
 rhit.FB_KEY_AUTHOR = 'author';
 rhit.fbMovieQuotesManager = null;
 rhit.fbSingleQuoteManager = null;
-rhit.MainPage = '/positivityTimeline.html';
+rhit.MainPage = null;
 rhit.loginController = null;
 rhit.incineratorPageController = null;
 
@@ -183,7 +183,8 @@ rhit.TimelineElementController = class {
 		document.querySelector("#submitDeleteQuote").addEventListener("click", (event) => {
 			rhit.fbSingleQuoteManager.delete().then(function() {
 				console.log("Document successfully deleted!");
-				window.location.href = "/positivityTimeline.html";
+				// window.location.href = "/positivityTimeline.html";
+				window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
 			}).catch(function(error){
 				console.error("Error removing document: ", error);
 			});
@@ -377,7 +378,7 @@ rhit.CheerUpPageController = class {
 rhit.sideBarController = class {
 	constructor(){
 		document.querySelector("#menuShowAllQuotes").addEventListener("click", (event) => {
-			window.location.href = "/positivityTimeline.html";
+			window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
 		});
 		document.querySelector("#menuShowMyQuotes").addEventListener("click", (event) => {
 			window.location.href = "/negativityIncinerator.html";
@@ -422,7 +423,7 @@ rhit.LoginPageController = class{
 			// Signed in
 			var user = userCredential.user;
 			console.log("Created user");
-			window.location.href = "/positivityTimeline.html";
+			window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
 			// ...
 			})
 			.catch((error) => {
@@ -438,7 +439,7 @@ rhit.LoginPageController = class{
 			firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
 			.then((userCredential) => {
 				// Signed in
-				window.location.href = "/positivityTimeline.html";
+				window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
 				console.log("Signed in", uid);
 				var user = userCredential.user;
 				// this._user.uid = userCredential.user.uid;
@@ -470,6 +471,7 @@ rhit.LoginPageController = class{
 
 		document.querySelector("#logInRosefire").onclick = (event) => {
 			this.signInRosefire();
+			window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
 		};
 
 	}
@@ -691,12 +693,12 @@ rhit.main = function () {
 
 rhit.startFirebaseUI = function() {		//used for firebase authentication ui
 	var uiConfig = {
-		signInSuccessUrl: rhit.MainPage, // redirecting URL
+		// signInSuccessUrl: `/positivityTimeline.html?uid=${rhit.loginController.uid}`, // redirecting URL
 		signInOptions: [
 			// firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 			// firebase.auth.EmailAuthProvider.PROVIDER_ID,
 			// firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-			firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+			// firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
 		],
 	};
 	const ui = new firebaseui.auth.AuthUI(firebase.auth());
