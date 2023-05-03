@@ -53,6 +53,13 @@ rhit.PositivityTimelineController = class {
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
 		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		let link = document.querySelector("link[rel~='icon']");
+		if (!link) {
+			link = document.createElement('link');
+			link.rel = 'icon';
+			document.head.appendChild(link);
+		}
+		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
 	}
 
 	signOut(){
@@ -197,6 +204,13 @@ rhit.TimelineElementController = class {
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
 		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		let link = document.querySelector("link[rel~='icon']");
+		if (!link) {
+			link = document.createElement('link');
+			link.rel = 'icon';
+			document.head.appendChild(link);
+		}
+		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
 	}
 	updateView() {  
 		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleQuoteManager.happyText;
@@ -577,6 +591,13 @@ rhit.SettingsPageController = class {
 			r.style.setProperty('--theme-color-light', `var(--color-${aaaatheme}-light)`);
 			let b = document.querySelector('#backgroundImage');
 			b.style.setProperty('background-image', `url("../images/${aaaatheme}_back.jpg")`);
+			let link = document.querySelector("link[rel~='icon']");
+		if (!link) {
+			link = document.createElement('link');
+			link.rel = 'icon';
+			document.head.appendChild(link);
+		}
+		link.href = `images/${aaaatheme}_favicon.ico`;
 	}
 }
 
@@ -589,6 +610,13 @@ rhit.IncineratorPageController = class {
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
 		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		let link = document.querySelector("link[rel~='icon']");
+		if (!link) {
+			link = document.createElement('link');
+			link.rel = 'icon';
+			document.head.appendChild(link);
+		}
+		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
 
 		document.querySelector("#menuSignOut").onclick = (event) => {
 			this.signOut();
