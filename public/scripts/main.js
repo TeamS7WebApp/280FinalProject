@@ -273,6 +273,13 @@ rhit.CheerUpPageController = class {
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
 		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		let link = document.querySelector("link[rel~='icon']");
+		if (!link) {
+			link = document.createElement('link');
+			link.rel = 'icon';
+			document.head.appendChild(link);
+		}
+		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
 	}
 
 	reloadData(){
@@ -520,10 +527,10 @@ rhit.LoginPageController = class{
 
 rhit.checkForRedirects = function() {
 	if(document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn){
-		window.location.href = "/list.html";
+		window.location.href = "/positivityTimeline.html";
 	} 
 	if(!document.querySelector("#loginPage") && !rhit.fbAuthManager.isSignedIn){
-		window.location.href = "/";
+		window.location.href = "/index.html";
 	} 
 };
 
