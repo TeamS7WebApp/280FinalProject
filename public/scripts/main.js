@@ -117,7 +117,7 @@ rhit.ElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyElement,
 		[rhit.FB_KEY_MOVIE]: otherHappyElement,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
+		[rhit.FB_KEY_AUTHOR]: localStorage.getItem("userID"),	//TODO fix: not sure if this variable is correct
 	})
 	.then(function(docRef){
 		console.log("Document written with ID: ", docRef.id);
@@ -425,6 +425,8 @@ rhit.sideBarController = class {
 
 rhit.LoginPageController = class{
 	constructor(){
+		let uid;
+		let tempID;
 
 		let r = document.querySelector(':root');
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
@@ -449,9 +451,11 @@ rhit.LoginPageController = class{
 			firebase.auth().createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
 			.then((userCredential) => {
 			// Signed in
-			var user = userCredential.user;
+			let user = userCredential.user;
 			console.log("Created user");
-			// window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
+			// uid = user.uid;
+			tempID = uid;
+			window.location.href = `/positivityTimeline.html?uid=${tempID}`;
 			// ...
 			})
 			.catch((error) => {
@@ -467,10 +471,12 @@ rhit.LoginPageController = class{
 			firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
 			.then((userCredential) => {
 				// Signed in
-				window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
+				window.location.href = `/positivityTimeline.html?uid=${uid}`;
 				console.log("Signed in", uid);
-				var user = userCredential.user;
+				let user = userCredential.user;
 				// this._user.uid = userCredential.user.uid;
+				tempID = uid;
+
 				
 				// ...
 			})
@@ -484,7 +490,7 @@ rhit.LoginPageController = class{
 		firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
 				this._user = user;
-				var uid = user.uid;
+				uid = user.uid;
 				var displayName = user.displayName;
 				var email = user.email;
 				var emailVerified = user.emailVerified;
@@ -492,8 +498,13 @@ rhit.LoginPageController = class{
 				var isAnonymous = user.isAnonymous;
 				var providerData = user.providerData;
 				console.log("Signed in", uid);
+				window.location.href = `/positivityTimeline.html?uid=${uid}`;
+				tempID = uid;
+				localStorage.setItem("userID", uid);
 			} else {
 				console.log("No user is signed in.");
+				// window.location.href = `/index.html`;
+				localStorage.setItem("userID", "");
 			}
 		  });
 
@@ -507,9 +518,9 @@ rhit.LoginPageController = class{
 	get isSignedIn() {
 		return !!this._user;
 	}
-	// get uid() {
-	// 	return this._user.uid;
-	// }
+	get uid() {
+		return this._user.uid;
+	}
 
 	signInRosefire() {
 		console.log("Sign in reached with rosefire");
@@ -535,9 +546,9 @@ rhit.LoginPageController = class{
  	 });
   
 	};
-	get uid() {
-		return this._user.uid;
-	}
+	// get uid() {
+	// 	return tempID;
+	// }
 
 	signOut(){
 		firebase.auth().signOut().catch((error) => {
