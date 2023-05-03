@@ -199,7 +199,7 @@ rhit.TimelineElementController = class {
 			rhit.fbSingleQuoteManager.delete().then(function() {
 				console.log("Document successfully deleted!");
 				// window.location.href = "/positivityTimeline.html";
-				window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
+				window.location.href = `/positivityTimeline.html?uid=${localStorage.getItem("userID")}`;
 			}).catch(function(error){
 				console.error("Error removing document: ", error);
 			});
@@ -255,7 +255,7 @@ rhit.SingleElementManager = class {
 		[rhit.FB_KEY_QUOTE]: happyText,
 		[rhit.FB_KEY_MOVIE]: otherHappyText,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		[rhit.FB_KEY_AUTHOR]: rhit.loginController.uid,	//TODO fix: not sure if this variable is correct
+		[rhit.FB_KEY_AUTHOR]: localStorage.getItem("userID"),	//TODO fix: not sure if this variable is correct
 	})
 	.then(() => {
 		console.log("Document updated successfully!");
@@ -407,7 +407,7 @@ rhit.CheerUpPageController = class {
 rhit.sideBarController = class {
 	constructor(){
 		document.querySelector("#menuShowAllQuotes").addEventListener("click", (event) => {
-			window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
+			window.location.href = `/positivityTimeline.html?uid=${localStorage.getItem("userID")}`;
 		});
 		document.querySelector("#menuShowMyQuotes").addEventListener("click", (event) => {
 			window.location.href = "/negativityIncinerator.html";
