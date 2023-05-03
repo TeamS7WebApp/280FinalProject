@@ -74,11 +74,14 @@ rhit.PositivityTimelineController = class {
 
 		for(let i = 0; i < rhit.fbMovieQuotesManager.length; i++){
 			const mq = rhit.fbMovieQuotesManager.getElementAtIndex(i);
-			const newCard = this._createCard(mq);
-			newCard.onclick = (event) => {
-				window.location.href = `/timelineElement.html?id=${mq.id}`;
+			console.log(mq.author);
+			if(mq.author == localStorage.getItem("userID")){
+				const newCard = this._createCard(mq);
+				newCard.onclick = (event) => {
+					window.location.href = `/timelineElement.html?id=${mq.id}`;
+				}
+				newList.appendChild(newCard);
 			}
-			newList.appendChild(newCard);
 		}
 
 		const oldList = document.querySelector("#quoteListContainer");
@@ -98,10 +101,11 @@ rhit.PositivityTimelineController = class {
 }
    
 rhit.TimelineElement = class {
-	constructor(id, quote, movie) {
+	constructor(id, quote, movie, author) {
 		this.id = id;
 		this.happyElement = quote;
 		this.otherHappyElement = movie;  
+		this.author = author;
 	}
 }
 
@@ -111,6 +115,10 @@ rhit.ElementManager = class {
 	  this._documentSnapshots = [];
 	  this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE);
 	  this._unsubscribe = null;
+	  this.author = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE).doc('author');
+	}
+	get Author() {
+		return this.author;
 	}
 	add(happyElement, otherHappyElement) {  
     this._ref.add({
@@ -162,7 +170,7 @@ rhit.ElementManager = class {
 	getElementAtIndex(index) {    
 		const docSnapshot = this._documentSnapshots[index];
 		const mq = new rhit.TimelineElement(
-			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_QUOTE),docSnapshot.get(rhit.FB_KEY_MOVIE),
+			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_QUOTE),docSnapshot.get(rhit.FB_KEY_MOVIE), docSnapshot.get(rhit.FB_KEY_AUTHOR)
 		);
 		return mq;
 	}
