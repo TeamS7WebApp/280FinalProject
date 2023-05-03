@@ -431,6 +431,13 @@ rhit.LoginPageController = class{
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
 		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		let link = document.querySelector("link[rel~='icon']");
+		if (!link) {
+			link = document.createElement('link');
+			link.rel = 'icon';
+			document.head.appendChild(link);
+		}
+		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
 
 		this._user = null;
 		const inputEmail = document.querySelector("#inputEmail");
@@ -444,7 +451,7 @@ rhit.LoginPageController = class{
 			// Signed in
 			var user = userCredential.user;
 			console.log("Created user");
-			window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
+			// window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
 			// ...
 			})
 			.catch((error) => {
