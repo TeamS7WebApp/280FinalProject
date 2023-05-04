@@ -307,6 +307,30 @@ rhit.CheerUpPageController = class {
 	reloadData(){
 		document.querySelector("#quoteTextCheerUp").innerHTML = this.getQuote();
 
+		const openImg = (src) => {
+			const base64ImageData = src;
+			const contentType = 'image/png';
+			const byteCharacters = atob(base64ImageData.substring(`data:${contentType};base64,`.length));
+			const byteArrays = [];
+		
+			for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
+			  const slice = byteCharacters.slice(offset, offset + 1024);
+		
+			  const byteNumbers = new Array(slice.length);
+			  for (let i = 0; i < slice.length; i++) {
+				byteNumbers[i] = slice.charCodeAt(i);
+			  }
+		
+			  const byteArray = new Uint8Array(byteNumbers);
+		
+			  byteArrays.push(byteArray);
+			}
+			const blob = new Blob(byteArrays, { type: contentType });
+			const blobUrl = URL.createObjectURL(blob);
+		
+			return blobUrl;
+		  }
+
 		let dataImage = localStorage.getItem('image');
 
 		if(dataImage == null){
@@ -314,15 +338,36 @@ rhit.CheerUpPageController = class {
 		}else {
 			console.log("working???");
 			let bannerImg = document.getElementById("cheerUpImage");
-			bannerImg.src = "data:image/png;base64," + dataImage;
+			// console.log(dataImage);
+			bannerImg.src = openImg(dataImage);
 		}
 
-		
-		
+		function toDataURL(src, callback, outputFormat) {
+			let image = new Image();
+			image.crossOrigin = 'Anonymous';
+			image.onload = function () {
+			  let canvas = document.createElement('canvas');
+			  let ctx = canvas.getContext('2d');
+			  let dataURL;
+			  canvas.height = this.naturalHeight;
+			  canvas.width = this.naturalWidth;
+			  ctx.drawImage(this, 0, 0);
+			  dataURL = canvas.toDataURL(outputFormat);
+			  callback(dataURL);
+			};
+			image.src = src;
+			if (image.complete || image.complete === undefined) {
+			  image.src = "data:image/gif;base64, R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+			  image.src = src;
+			}
+		  }
 
-		// document.getElementById("cheerUpImage").src=`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`;
-
-		// bannerImage = document.getElementById("cheerUpImage");
+		toDataURL(`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`,
+  		function (dataUrl) {
+   		//  console.log('RESULT:', dataUrl)
+		localStorage.setItem('image', dataUrl);
+  }
+)
 		
 	}
 
@@ -458,6 +503,7 @@ rhit.LoginPageController = class{
 		inputEmail.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
    		const inputPassword = document.querySelector("#inputPassword");
 		inputPassword.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
+
 		rhit.startFirebaseUI();
 
 		document.querySelector("#createAccountButton").onclick = (event) => {
@@ -631,6 +677,7 @@ rhit.SettingsPageController = class {
 		}
 		link.href = `images/${aaaatheme}_favicon.ico`;
 	}
+
 }
 
 
@@ -701,6 +748,19 @@ rhit.main = function () {
 		localStorage.setItem("theme","green");
 	}else{
 		console.log("storage is not null");
+	}
+
+	function getBase64Image(img) {
+		var canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+	
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0);
+	
+		var dataURL = canvas.toDataURL("image/png");
+	
+		return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 	}
 
 	if(document.querySelector("#QuotePage")){
