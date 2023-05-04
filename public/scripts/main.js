@@ -362,7 +362,7 @@ rhit.CheerUpPageController = class {
 			}
 		  }
 
-		toDataURL(`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`,
+		toDataURL(`https://picsum.photos/${Math.floor(900 + (Math.random() * 100))}/${Math.floor(900 + (Math.random() * 100))}`,
   		function (dataUrl) {
    		//  console.log('RESULT:', dataUrl)
 		localStorage.setItem('image', dataUrl);
