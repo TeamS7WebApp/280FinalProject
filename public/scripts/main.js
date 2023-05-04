@@ -74,7 +74,7 @@ rhit.PositivityTimelineController = class {
 
 		for(let i = 0; i < rhit.fbMovieQuotesManager.length; i++){
 			const mq = rhit.fbMovieQuotesManager.getElementAtIndex(i);
-			console.log(mq.author);
+			// console.log(mq.author);
 			if(mq.author == localStorage.getItem("userID")){
 				const newCard = this._createCard(mq);
 				newCard.onclick = (event) => {
