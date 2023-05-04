@@ -448,10 +448,16 @@ rhit.LoginPageController = class{
 			document.head.appendChild(link);
 		}
 		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
+		let passIn = document.querySelector('#passIn');
+		passIn.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
+		let emailIn = document.querySelector('#emailIn');
+		emailIn.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
 
 		this._user = null;
 		const inputEmail = document.querySelector("#inputEmail");
+		inputEmail.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
    		const inputPassword = document.querySelector("#inputPassword");
+		inputPassword.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
 		rhit.startFirebaseUI();
 
 		document.querySelector("#createAccountButton").onclick = (event) => {
