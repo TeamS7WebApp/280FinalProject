@@ -11,6 +11,7 @@ rhit.MainPage = null;
 rhit.loginController = null;
 rhit.incineratorPageController = null;
 rhit.backgroundChecker = null;
+rhit.user = null;
 
 //From stackoverflow
 function htmlToElement(html){
@@ -537,6 +538,9 @@ rhit.LoginPageController = class{
 		
 		firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
+				rhit.user = JSON.stringify(user);
+				// console.log(rhit.user);
+				localStorage.setItem("user", rhit.user);			
 				this._user = user;
 				uid = user.uid;
 				var displayName = user.displayName;
@@ -645,7 +649,16 @@ rhit.SettingsPageController = class {
 		};
 
 		document.querySelector('#deleteAccountButton').onclick = (event) => {
-			firebase.auth.removeUser(rhit.loginController.uid);
+			let use1 = localStorage.getItem("user");
+			console.log(use1)
+			let use = JSON.parse(use1);
+			console.log(use)
+			use.delete().then(() => {
+				console.log("User deleted")
+			  }).catch((error) => {
+				// An error ocurred
+				// ...
+			  });
 			document.location.href = "/";
 
 		}
