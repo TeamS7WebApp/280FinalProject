@@ -22,7 +22,7 @@ function htmlToElement(html){
 rhit.PositivityTimelineController = class {
 	constructor() {
 
-		document.querySelector("#submitAddQuote").addEventListener("click",(event) => {
+		document.querySelector("#submitAddEntry").addEventListener("click",(event) => {
 			const text = document.querySelector("#inputQuote").value;
 			console.log("addquotesubmitbutton");
 			rhit.fbTimelineEntriesManager.add(text);
