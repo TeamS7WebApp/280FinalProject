@@ -1,13 +1,12 @@
 var rhit = rhit || {};
 
 /** globals */
-rhit.FB_COLLECTION_MOVIEQUOTE = "TimelineEntries";
-rhit.FB_KEY_QUOTE = "text";
-rhit.FB_KEY_MOVIE = "text";
+rhit.FB_COLLECTION_TIMELINE = "TimelineEntries";
+rhit.FB_KEY_ENTRY = "text";
 rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
 rhit.FB_KEY_AUTHOR = 'author';
-rhit.fbMovieQuotesManager = null;
-rhit.fbSingleQuoteManager = null;
+rhit.fbTimelineEntriesManager = null;
+rhit.fbSingleTimelineEntryManager = null;
 rhit.MainPage = null;
 rhit.loginController = null;
 rhit.incineratorPageController = null;
@@ -24,11 +23,9 @@ rhit.PositivityTimelineController = class {
 	constructor() {
 
 		document.querySelector("#submitAddQuote").addEventListener("click",(event) => {
-			const quote = document.querySelector("#inputQuote").value;
-			// const movie = document.querySelector("#inputMovie").value;
+			const text = document.querySelector("#inputQuote").value;
 			console.log("addquotesubmitbutton");
-			// console.log(quote);
-			rhit.fbMovieQuotesManager.add(quote, quote);
+			rhit.fbTimelineEntriesManager.add(text);
 
 		});
 
@@ -37,16 +34,15 @@ rhit.PositivityTimelineController = class {
 		};
 
 
-		$("#addQuoteDialog").on("show.bs.modal", (event) => {
+		$("#addElementDialog").on("show.bs.modal", (event) => {
 			document.querySelector("#inputQuote").value = "";
-			// document.querySelector("#inputMovie").value = "";
 		});
-		$("#addQuoteDialog").on("shown.bs.modal", (event) => {
+		$("#addElementDialog").on("shown.bs.modal", (event) => {
 			document.querySelector("#inputQuote").focus();
 		});
 
 		//start listening
-		rhit.fbMovieQuotesManager.beginListening(this.updateList.bind(this));
+		rhit.fbTimelineEntriesManager.beginListening(this.updateList.bind(this));
 
 		let r = document.querySelector(':root');
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
@@ -72,8 +68,8 @@ rhit.PositivityTimelineController = class {
 	updateList() {
 		const newList = htmlToElement('<div id="quoteListContainer"></div>');
 
-		for(let i = 0; i < rhit.fbMovieQuotesManager.length; i++){
-			const mq = rhit.fbMovieQuotesManager.getElementAtIndex(i);
+		for(let i = 0; i < rhit.fbTimelineEntriesManager.length; i++){
+			const mq = rhit.fbTimelineEntriesManager.getElementAtIndex(i);
 			// console.log(mq.author);
 			if(mq.author == localStorage.getItem("userID")){
 				const newCard = this._createCard(mq);
@@ -99,12 +95,11 @@ rhit.PositivityTimelineController = class {
 		</div>`);
 	}
 }
-   
+
 rhit.TimelineElement = class {
-	constructor(id, quote, movie, author) {
+	constructor(id, text, author) {
 		this.id = id;
-		this.happyElement = quote;
-		this.otherHappyElement = movie;  
+		this.happyElement = text; 
 		this.author = author;
 	}
 }
@@ -113,28 +108,28 @@ rhit.ElementManager = class {
 	constructor(ID) {
 	  this._uid = ID;
 	  this._documentSnapshots = [];
-	  this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE);
+	  this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_TIMELINE);
 	  this._unsubscribe = null;
-	  this.author = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE).doc('author');
+	  this.author = firebase.firestore().collection(rhit.FB_COLLECTION_TIMELINE).doc('author');
 	}
 	get Author() {
 		return this.author;
 	}
-	add(happyElement, otherHappyElement) {  
-    this._ref.add({
-		[rhit.FB_KEY_QUOTE]: happyElement,
-		[rhit.FB_KEY_MOVIE]: otherHappyElement,
-		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
-		[rhit.FB_KEY_AUTHOR]: localStorage.getItem("userID"),	//TODO fix: not sure if this variable is correct
-	})
-	.then(function(docRef){
-		console.log("Document written with ID: ", docRef.id);
-	})
-	.catch(function(error){
-		console.error("error adding document: ", docRef.id);
-	});
 
-	  }
+	add(happyElement) {  
+		this._ref.add({
+			[rhit.FB_KEY_ENTRY]: happyElement,
+			[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
+			[rhit.FB_KEY_AUTHOR]: localStorage.getItem("userID"),	//TODO fix: not sure if this variable is correct
+		})
+		.then(function(docRef){
+			console.log("Document written with ID: ", docRef.id);
+		})
+		.catch(function(error){
+			console.error("error adding document: ", docRef.id);
+		});
+	
+		  }
 	  beginListening(changeListener) {  
 
 		let query = this._ref.orderBy(rhit.FB_KEY_LAST_TOUCHED, "desc").limit(50)
@@ -169,10 +164,10 @@ rhit.ElementManager = class {
 	    }
 	getElementAtIndex(index) {    
 		const docSnapshot = this._documentSnapshots[index];
-		const mq = new rhit.TimelineElement(
-			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_QUOTE),docSnapshot.get(rhit.FB_KEY_MOVIE), docSnapshot.get(rhit.FB_KEY_AUTHOR)
+		const te = new rhit.TimelineElement(
+			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_ENTRY), docSnapshot.get(rhit.FB_KEY_AUTHOR)
 		);
-		return mq;
+		return te;
 	}
 }
 
@@ -180,23 +175,20 @@ rhit.TimelineElementController = class {
 	constructor() {
 
 		document.querySelector("#submitEditQuote").addEventListener("click", (event) => {
-			const quote = document.querySelector("#inputQuote").value;
-			// console.log(quote, "test here")
-			// const movie = document.querySelector("#inputMovie").value;
-			rhit.fbSingleQuoteManager.update(quote, quote);
+			const text = document.querySelector("#inputQuote").value;
+			rhit.fbSingleTimelineEntryManager.update(text);
 		});
 
 
 		$("#editQuoteDialog").on("show.bs.modal", (event) => {
-			document.querySelector("#inputQuote").value = rhit.fbSingleQuoteManager.happyText;
-			// document.querySelector("#inputMovie").value = rhit.fbSingleQuoteManager.movie;
+			document.querySelector("#inputQuote").value = rhit.fbSingleTimelineEntryManager.happyText;
 		});
 		$("#editQuoteDialog").on("shown.bs.modal", (event) => {
 			document.querySelector("#inputQuote").focus();
 		});
 
 		document.querySelector("#submitDeleteQuote").addEventListener("click", (event) => {
-			rhit.fbSingleQuoteManager.delete().then(function() {
+			rhit.fbSingleTimelineEntryManager.delete().then(function() {
 				console.log("Document successfully deleted!");
 				// window.location.href = "/positivityTimeline.html";
 				window.location.href = `/positivityTimeline.html?uid=${localStorage.getItem("userID")}`;
@@ -205,7 +197,7 @@ rhit.TimelineElementController = class {
 			});
 		});
 
-		rhit.fbSingleQuoteManager.beginListening(this.updateView.bind(this));
+		rhit.fbSingleTimelineEntryManager.beginListening(this.updateView.bind(this));
 
 		let r = document.querySelector(':root');
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
@@ -221,17 +213,16 @@ rhit.TimelineElementController = class {
 		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
 	}
 	updateView() {  
-		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleQuoteManager.happyText;
-		// document.querySelector("#cardMovie").innerHTML = rhit.fbSingleQuoteManager.movie;
+		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleTimelineEntryManager.happyText;
 
 	}
 }
 
 rhit.SingleElementManager = class {
- constructor(movieQuoteId) {
+ constructor(elementId) {
    this._documentSnapshot = {};
    this._unsubscribe = null;
-   this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_MOVIEQUOTE).doc(movieQuoteId);
+   this._ref = firebase.firestore().collection(rhit.FB_COLLECTION_TIMELINE).doc(elementId);
    console.log(`listening to ${this._ref.path}`);
  }
  beginListening(changeListener) {
@@ -250,10 +241,9 @@ rhit.SingleElementManager = class {
  stopListening() {
    this._unsubscribe();
  }
- update(happyText, otherHappyText) {
+ update(happyText) {
 	this._ref.update({
-		[rhit.FB_KEY_QUOTE]: happyText,
-		[rhit.FB_KEY_MOVIE]: otherHappyText,
+		[rhit.FB_KEY_ENTRY]: happyText,
 		[rhit.FB_KEY_LAST_TOUCHED]: firebase.firestore.Timestamp.now(),
 		[rhit.FB_KEY_AUTHOR]: localStorage.getItem("userID"),	//TODO fix: not sure if this variable is correct
 	})
@@ -269,10 +259,7 @@ rhit.SingleElementManager = class {
  }
 
  get happyText(){
-	return this._documentSnapshot.get(rhit.FB_KEY_QUOTE);
- }
- get otherHappyText(){
-	return this._documentSnapshot.get(rhit.FB_KEY_MOVIE);
+	return this._documentSnapshot.get(rhit.FB_KEY_ENTRY);
  }
 }
 
@@ -451,10 +438,10 @@ rhit.CheerUpPageController = class {
 
 rhit.sideBarController = class {
 	constructor(){
-		document.querySelector("#menuShowAllQuotes").addEventListener("click", (event) => {
+		document.querySelector("#menuTimeline").addEventListener("click", (event) => {
 			window.location.href = `/positivityTimeline.html?uid=${localStorage.getItem("userID")}`;
 		});
-		document.querySelector("#menuShowMyQuotes").addEventListener("click", (event) => {
+		document.querySelector("#menuIncinerator").addEventListener("click", (event) => {
 			window.location.href = "/negativityIncinerator.html";
 		});
 		document.querySelector("#menuCheerUp").addEventListener("click", (event) => {
@@ -765,7 +752,7 @@ rhit.main = function () {
 
 	if(document.querySelector("#QuotePage")){
 		console.log("list page");
-		rhit.fbMovieQuotesManager = new rhit.ElementManager();
+		rhit.fbTimelineEntriesManager = new rhit.ElementManager();
 		new rhit.PositivityTimelineController();
 		console.log("List page created");
 	}
@@ -776,14 +763,14 @@ rhit.main = function () {
 		const queryString = window.location.search;
 		console.log(queryString);
 		const urlParams = new URLSearchParams(queryString);
-		const movieQuoteId = urlParams.get("id");
+		const elementId = urlParams.get("id");
 
-		if(!movieQuoteId){
-			console.log(`Error! Missing movie quote id!`);
+		if(!elementId){
+			console.log(`Error! Missing element id!`);
 			window.location.href = "/";
 		}
 
-		rhit.fbSingleQuoteManager = new rhit.SingleElementManager(movieQuoteId);
+		rhit.fbSingleTimelineEntryManager = new rhit.SingleElementManager(elementId);
 		new rhit.TimelineElementController();
 
 	}
