@@ -790,7 +790,7 @@ rhit.BackgroundChecker = class {
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
-	//rhit.backgroundChecker = new rhit.BackgroundChecker();
+	// rhit.backgroundChecker = new rhit.BackgroundChecker();
 	if(localStorage.getItem("theme") == null){
 		localStorage.setItem("theme","green");
 	}else{
