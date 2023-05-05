@@ -10,6 +10,7 @@ rhit.fbSingleTimelineEntryManager = null;
 rhit.MainPage = null;
 rhit.loginController = null;
 rhit.incineratorPageController = null;
+rhit.backgroundChecker = null;
 
 //From stackoverflow
 function htmlToElement(html){
@@ -323,7 +324,7 @@ rhit.CheerUpPageController = class {
 		if(dataImage == null){
 			document.getElementById("cheerUpImage").src=`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`;
 		}else {
-			console.log("working???");
+			// console.log("working???");
 			let bannerImg = document.getElementById("cheerUpImage");
 			// console.log(dataImage);
 			bannerImg.src = openImg(dataImage);
@@ -727,10 +728,69 @@ rhit.IncineratorPageController = class {
 	}
 }
 
+rhit.BackgroundChecker = class {
+    constructor(){
+		function toDataURL(src, callback, outputFormat) {
+			let image = new Image();
+			image.crossOrigin = 'Anonymous';
+			image.onload = function () {
+			  let canvas = document.createElement('canvas');
+			  let ctx = canvas.getContext('2d');
+			  let dataURL;
+			  canvas.height = this.naturalHeight;
+			  canvas.width = this.naturalWidth;
+			  ctx.drawImage(this, 0, 0);
+			  dataURL = canvas.toDataURL(outputFormat);
+			  callback(dataURL);
+			};
+			image.src = src;
+			if (image.complete || image.complete === undefined) {
+			  image.src = "data:image/gif;base64, R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+			  image.src = src;
+			}
+		}
+        if(localStorage.getItem('background_green') == null){
+            toDataURL(`images/green_back.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('background_green', dataUrl);
+            });
+            toDataURL(`images/blue_back.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('background_blue', dataUrl);
+            });
+            toDataURL(`images/orange_back.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('background_orange', dataUrl);
+            });
+            toDataURL(`images/purple_back.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('background_purple', dataUrl);
+            });
+            toDataURL(`images/pink_back.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('background_pink', dataUrl);
+            });
+            toDataURL(`images/red_back.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('background_red', dataUrl);
+			});
+        }
+    }
+
+    
+}
+
 /* Main */
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
+	//rhit.backgroundChecker = new rhit.BackgroundChecker();
 	if(localStorage.getItem("theme") == null){
 		localStorage.setItem("theme","green");
 	}else{
