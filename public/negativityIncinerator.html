@@ -58,7 +58,7 @@
         <div>&nbsp;</div>
         <div>&nbsp;</div>
         <div id="innerInput">
-        <input type="negative" id="inputnegative" class="form-control" />
+        <input type="negative" id="inputnegative" class="form-control" ondrop="onInputDrop(event)" />
         </div>
         <div>&nbsp;</div>
         <div>&nbsp;</div>
@@ -89,6 +89,10 @@
 
 
 <script>
+
+function onInputDrop(event) {
+    event.preventDefault();
+  }
 
   function replaceCard() {
     console.log("inside replace");
