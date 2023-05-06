@@ -804,37 +804,13 @@ rhit.IncineratorPageController = class {
 			this.signOut();
 		};
 
-		document.querySelector("#draggable-1").onDragStart = (event) => {
-			console.log("in onDragStart");
-			document.querySelector('#innerInput').innerHTML = "";
-			document.querySelector('#innerInput').innerHTML = `<input type="negative" id="inputnegative" class="form-control" />`;
-		}
 
-		const drag = document.querySelector('#draggable-1');
-		drag.addEventListener("drop", (event) => {
-			event.preventDefault();
-			console.log("got here");
-		});
+		
+
 		
 	}
 
-	drop(ev) {
-		ev.preventDefault();
 
-		console.log("got here");
-	  
-		const data = ev.dataTransfer.getData("text");
-	  
-		const element = document.getElementById(data);
-	  
-		ev.target.appendChild(element);
-	  
-		console.log(`${data} in ${ev.target.id}`);
-	  }
-
-	handleDrop(){
-		
-	}
 
 	signOut(){
 		firebase.auth().signOut().catch((error) => {
