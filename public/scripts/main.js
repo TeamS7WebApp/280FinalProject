@@ -826,7 +826,7 @@ rhit.BackgroundChecker = class {
 
 		this.checkBackground();
 		this.checkFavicon();
-        
+        this.checkTextTheme();
     }
 
 	toDataURL(src, callback, outputFormat) {
@@ -920,6 +920,19 @@ rhit.BackgroundChecker = class {
 		}
 	}
 
+	checkTextTheme(){
+
+		let color;
+		if(localStorage.getItem("theme") == "purple" || localStorage.getItem("theme") == "green" || localStorage.getItem("theme") == "blue" ){
+			color = "light";
+		} else{
+			color = "dark";
+		}
+
+		let r = document.querySelector(':root');
+		r.style.setProperty('--theme-color-card', `var(--transparent-${color})`);
+	}
+
     
 }
 
@@ -928,12 +941,12 @@ rhit.BackgroundChecker = class {
 rhit.main = function () {
 	console.log("Ready");
 	rhit.fbAuth = new rhit.FBAuth();
-	rhit.backgroundChecker = new rhit.BackgroundChecker();
 	if(localStorage.getItem("theme") == null){
 		localStorage.setItem("theme","green");
 	}else{
 		console.log("storage is not null");
 	}
+	rhit.backgroundChecker = new rhit.BackgroundChecker();
 
 	function getBase64Image(img) {
 		var canvas = document.createElement("canvas");

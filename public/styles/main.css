@@ -15,7 +15,8 @@
     --color-white: #ffff;
     --theme-color: var(--color-white);
     --theme-color-light: var(--color-white);
-    --transparent-light: rgba(255,255,255,0.53);
+    --theme-color-card: var(--transparent-light);
+    --transparent-light: rgba(225,225,225,0.33);
     --transparent-dark: rgba(0,0,0,0.53);
   }
 
@@ -40,7 +41,7 @@ body {
     --mdb-card-cap-padding-y: 0.75rem;
     --mdb-card-cap-padding-x: 1.5rem;
     --mdb-card-cap-bg: hsla(0,0%,100%,0) !important;
-    --mdb-card-bg: rgba(0,0,0,0.53);
+    --mdb-card-bg: var(--theme-color-card);
     --mdb-card-img-overlay-padding: 1.5rem;
     --mdb-card-group-margin: 0.75rem;
     position: relative;
