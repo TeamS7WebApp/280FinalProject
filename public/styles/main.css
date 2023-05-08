@@ -26,6 +26,8 @@ body {
     color: white;
 }
 
+
+
 #inputPassword.form-control{
     background-image: linear-gradient(0deg,var(--theme-color)  2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
@@ -109,7 +111,7 @@ body {
 
 .card{
     margin: 10px 10px 10px 10px;
-    background-color: var(--theme-color-light);
+    /* background-color: var(--theme-color-light); */
     color: white;
     border-radius: 16px;
 }
@@ -180,8 +182,6 @@ body {
 #deleteAccountButton{
     background-color: var(--color-red);
     color: white;
-    border-radius: 16px;
-
 }
 
 #deleteAccountDiv{
@@ -193,7 +193,7 @@ body {
 }
 
 #CheerUpButton, #createAccountButton, #logInButton, #logInRosefire, #createAccountButtonDedicated{
-    background-color: var(--theme-color); color: white; border-radius: 16px;
+    background-color: var(--theme-color); color: white;
 }
 
 #inputnegative{
