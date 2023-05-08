@@ -881,6 +881,11 @@ rhit.BackgroundChecker = class {
                 console.log('RESULT:', dataUrl)
                 localStorage.setItem('background_red', dataUrl);
 			});
+			this.toDataURL(`images/aaa.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('background_red', dataUrl);
+			});
         }
 	}
 
