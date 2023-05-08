@@ -59,7 +59,7 @@ rhit.PositivityTimelineController = class {
 			link.rel = 'icon';
 			document.head.appendChild(link);
 		}
-		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
+		link.href = localStorage.getItem(`favicon_${localStorage.getItem("theme")}`);
 	}
 
 	signOut(){
@@ -214,7 +214,7 @@ rhit.TimelineElementController = class {
 			link.rel = 'icon';
 			document.head.appendChild(link);
 		}
-		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
+		link.href = localStorage.getItem(`favicon_${localStorage.getItem("theme")}`);
 	}
 	updateView() {  
 		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleTimelineEntryManager.happyText;
@@ -292,7 +292,7 @@ rhit.CheerUpPageController = class {
 			link.rel = 'icon';
 			document.head.appendChild(link);
 		}
-		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
+		link.href = localStorage.getItem(`favicon_${localStorage.getItem("theme")}`);
 	}
 
 	reloadData(){
@@ -669,7 +669,7 @@ rhit.LoginPageController = class{
 			link.rel = 'icon';
 			document.head.appendChild(link);
 		}
-		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
+		link.href = localStorage.getItem(`favicon_${localStorage.getItem("theme")}`);
 		let passIn = document.querySelector('#passIn');
 		passIn.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
 		let emailIn = document.querySelector('#emailIn');
@@ -798,7 +798,8 @@ rhit.IncineratorPageController = class {
 			link.rel = 'icon';
 			document.head.appendChild(link);
 		}
-		link.href = `images/${localStorage.getItem("theme")}_favicon.ico`;
+		link.href = localStorage.getItem(`favicon_${localStorage.getItem("theme")}`);
+		// console.log(link.href)
 
 		document.querySelector("#menuSignOut").onclick = (event) => {
 			this.signOut();
@@ -821,58 +822,103 @@ rhit.IncineratorPageController = class {
 
 rhit.BackgroundChecker = class {
     constructor(){
-		function toDataURL(src, callback, outputFormat) {
-			let image = new Image();
-			image.crossOrigin = 'Anonymous';
-			image.onload = function () {
-			  let canvas = document.createElement('canvas');
-			  let ctx = canvas.getContext('2d');
-			  let dataURL;
-			  canvas.height = this.naturalHeight;
-			  canvas.width = this.naturalWidth;
-			  ctx.drawImage(this, 0, 0);
-			  dataURL = canvas.toDataURL(outputFormat);
-			  callback(dataURL);
-			};
-			image.src = src;
-			if (image.complete || image.complete === undefined) {
-			  image.src = "data:image/gif;base64, R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-			  image.src = src;
-			}
+		
+
+		this.checkBackground();
+		this.checkFavicon();
+        
+    }
+
+	toDataURL(src, callback, outputFormat) {
+		let image = new Image();
+		image.crossOrigin = 'Anonymous';
+		image.onload = function () {
+		  let canvas = document.createElement('canvas');
+		  let ctx = canvas.getContext('2d');
+		  let dataURL;
+		  canvas.height = this.naturalHeight;
+		  canvas.width = this.naturalWidth;
+		  ctx.drawImage(this, 0, 0);
+		  dataURL = canvas.toDataURL(outputFormat);
+		  callback(dataURL);
+		};
+		image.src = src;
+		if (image.complete || image.complete === undefined) {
+		  image.src = "data:image/gif;base64, R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+		  image.src = src;
 		}
-        if(localStorage.getItem('background_green') == null){
-            toDataURL(`images/green_back.jpg`,
+	}
+
+	checkBackground(){
+		if(localStorage.getItem('background_green') == 'YoUr MoM'){		//should never occur
+            this.toDataURL(`images/green_back.jpg`,
              function (dataUrl) {
                 console.log('RESULT:', dataUrl)
                 localStorage.setItem('background_green', dataUrl);
             });
-            toDataURL(`images/blue_back.jpg`,
+            this.toDataURL(`images/blue_back.jpg`,
              function (dataUrl) {
                 console.log('RESULT:', dataUrl)
                 localStorage.setItem('background_blue', dataUrl);
             });
-            toDataURL(`images/orange_back.jpg`,
+            this.toDataURL(`images/orange_back.jpg`,
              function (dataUrl) {
                 console.log('RESULT:', dataUrl)
                 localStorage.setItem('background_orange', dataUrl);
             });
-            toDataURL(`images/purple_back.jpg`,
+            this.toDataURL(`images/purple_back.jpg`,
              function (dataUrl) {
                 console.log('RESULT:', dataUrl)
                 localStorage.setItem('background_purple', dataUrl);
             });
-            toDataURL(`images/pink_back.jpg`,
+            this.toDataURL(`images/pink_back.jpg`,
              function (dataUrl) {
                 console.log('RESULT:', dataUrl)
                 localStorage.setItem('background_pink', dataUrl);
             });
-            toDataURL(`images/red_back.jpg`,
+            this.toDataURL(`images/red_back.jpg`,
              function (dataUrl) {
                 console.log('RESULT:', dataUrl)
                 localStorage.setItem('background_red', dataUrl);
 			});
         }
-    }
+	}
+
+	checkFavicon(){
+		if(localStorage.getItem('favicon_green') == null){
+			this.toDataURL(`images/green_favicon.ico`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('favicon_green', dataUrl);
+            });
+            this.toDataURL(`images/blue_favicon.ico`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('favicon_blue', dataUrl);
+            });
+            this.toDataURL(`images/orange_favicon.ico`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('favicon_orange', dataUrl);
+            });
+            this.toDataURL(`images/purple_favicon.ico`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('favicon_purple', dataUrl);
+            });
+            this.toDataURL(`images/pink_favicon.ico`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('favicon_pink', dataUrl);
+            });
+            this.toDataURL(`images/red_favicon.ico`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem('favicon_red', dataUrl);
+			});
+			// console.log("favicons in local storage")
+		}
+	}
 
     
 }
@@ -882,7 +928,7 @@ rhit.BackgroundChecker = class {
 rhit.main = function () {
 	console.log("Ready");
 	rhit.fbAuth = new rhit.FBAuth();
-	// rhit.backgroundChecker = new rhit.BackgroundChecker();
+	rhit.backgroundChecker = new rhit.BackgroundChecker();
 	if(localStorage.getItem("theme") == null){
 		localStorage.setItem("theme","green");
 	}else{
