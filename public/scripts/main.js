@@ -12,6 +12,8 @@ rhit.loginController = null;
 rhit.incineratorPageController = null;
 rhit.backgroundChecker = null;
 rhit.user = null;
+rhit.fbAuth = null;
+_user = null;
 
 //From stackoverflow
 function htmlToElement(html){
@@ -460,6 +462,197 @@ rhit.sideBarController = class {
 	}
 }
 
+rhit.FBAuth = class {
+	constructor(){
+		let uid;
+		let tempID;
+		this._user = null;
+		
+	}
+
+	createAccount(inputEmail, inputPassword){
+		let uid;
+		let tempID;
+		firebase.auth().createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
+			.then((userCredential) => {
+			// Signed in
+			let user = userCredential.user;
+			console.log("Created user");
+			// uid = user.uid;
+			tempID = uid;
+			window.location.href = `/positivityTimeline.html?uid=${tempID}`;
+			this.changeListener();
+			// ...
+			})
+			.catch((error) => {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				// console.log("Create user error", errorCode, errorMessage);
+			});
+
+			firebase.auth().onAuthStateChanged((user) => {
+				if (user) {
+					rhit.user = JSON.stringify(user);
+					// console.log(rhit.user);
+					localStorage.setItem("user", rhit.user);			
+					this._user = user;
+					uid = user.uid;
+					var displayName = user.displayName;
+					var email = user.email;
+					var emailVerified = user.emailVerified;
+					var photoURL = user.photoURL;
+					var isAnonymous = user.isAnonymous;
+					var providerData = user.providerData;
+					console.log("Signed in", uid);
+					// window.location.href = `/positivityTimeline.html?uid=${uid}`;
+					tempID = uid;
+					localStorage.setItem("userID", uid);
+				} else {
+					console.log("No user is signed in.");
+					// window.location.href = `/index.html`;
+					localStorage.setItem("userID", "");
+				}
+			  });
+	}
+
+	logIn(inputEmail, inputPassword){
+		let uid;
+		let tempID;
+		firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
+			.then((userCredential) => {
+				// Signed in
+				window.location.href = `/positivityTimeline.html?uid=${uid}`;
+				console.log("Signed in", uid);
+				// let user = userCredential.user;
+				// this._user.uid = userCredential.user.uid;
+				tempID = uid;
+
+				
+				// ...
+			})
+			.catch((error) => {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				// console.log("Create user error", errorCode, errorMessage);
+			});
+
+			firebase.auth().onAuthStateChanged((user) => {
+				if (user) {
+					rhit.user = JSON.stringify(user);
+					// console.log(rhit.user);
+					localStorage.setItem("user", rhit.user);			
+					this._user = user;
+					uid = user.uid;
+					var displayName = user.displayName;
+					var email = user.email;
+					var emailVerified = user.emailVerified;
+					var photoURL = user.photoURL;
+					var isAnonymous = user.isAnonymous;
+					var providerData = user.providerData;
+					console.log("Signed in", uid);
+					// window.location.href = `/positivityTimeline.html?uid=${uid}`;
+					tempID = uid;
+					localStorage.setItem("userID", uid);
+				} else {
+					console.log("No user is signed in.");
+					// window.location.href = `/index.html`;
+					localStorage.setItem("userID", "");
+				}
+			  });
+	}
+
+
+	changeListener(){
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				rhit.user = JSON.stringify(user);
+				// console.log(rhit.user);
+				localStorage.setItem("user", rhit.user);			
+				this._user = user;
+				uid = user.uid;
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var providerData = user.providerData;
+				console.log("Signed in", uid);
+				// window.location.href = `/positivityTimeline.html?uid=${uid}`;
+				tempID = uid;
+				localStorage.setItem("userID", uid);
+			} else {
+				console.log("No user is signed in.");
+				// window.location.href = `/index.html`;
+				localStorage.setItem("userID", "");
+			}
+		  });
+	}
+
+	signInRosefire() {
+		console.log("Sign in reached with rosefire");
+	Rosefire.signIn("ea2c30dc-6d5f-44a2-8c08-6daaf8433dad", (err, rfUser) => {	//This has correct key for B+
+	if (err) {
+	  console.log("Rosefire error!", err);
+	  return;
+	}
+
+	
+
+	firebase.auth().signInWithCustomToken(rfUser.token).catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			// console.log("Create user error", errorCode, errorMessage);
+			if(errorCode === 'auth/invalid-custom-token'){
+				alert('The token you provided is not valid');
+			} else{
+				console.error("custom auth error", errorCode, errorMessage);
+			}
+		});
+
+ 	 });
+
+	firebase.auth().onAuthStateChanged((user) => {
+	if (user) {
+		// rhit.user = JSON.stringify(user);
+		console.log(user);
+		// localStorage.setItem("user", rhit.user);			
+		this._user = user;
+		let uid = user.uid;
+
+		console.log("Signed in", uid);
+		// window.location.href = `/positivityTimeline.html?uid=${uid}`;
+		// tempID = uid;
+		localStorage.setItem("userID", uid);
+	} else {
+		console.log("No user is signed in.");
+		// window.location.href = `/index.html`;
+		localStorage.setItem("userID", "");
+	}
+	});
+  
+	};
+
+	get isSignedIn() {
+		return !!this._user;
+	}
+	get uid() {
+		return this._user.uid;
+		// return localStorage.getItem("userID");
+	}
+
+	deleteAccount(){
+		this._user.delete().then(() => {
+			console.log("User deleted")
+		  }).catch((error) => {
+			// An error ocurred
+			// ...
+		  });
+	}
+	
+
+	// rhit.startFirebaseUI();
+}
+
 rhit.LoginPageController = class{
 	constructor(){
 		let uid;
@@ -488,111 +681,29 @@ rhit.LoginPageController = class{
    		const inputPassword = document.querySelector("#inputPassword");
 		inputPassword.style.setProperty("color",`var(--color-${localStorage.getItem("theme")})`);
 
-		rhit.startFirebaseUI();
+		
 
 		document.querySelector("#createAccountButton").onclick = (event) => {
 			console.log(`Create account for email: ${inputEmail.value}  password: ${inputPassword.value}`);
-			firebase.auth().createUserWithEmailAndPassword(inputEmail.value, inputPassword.value)
-			.then((userCredential) => {
-			// Signed in
-			let user = userCredential.user;
-			console.log("Created user");
-			// uid = user.uid;
-			tempID = uid;
-			window.location.href = `/positivityTimeline.html?uid=${tempID}`;
-			// ...
-			})
-			.catch((error) => {
-				var errorCode = error.code;
-				var errorMessage = error.message;
-				// console.log("Create user error", errorCode, errorMessage);
-			});
+			rhit.fbAuth.createAccount(inputEmail, inputPassword);
 		};
 	
 	
 		document.querySelector("#logInButton").onclick = (event) => {
 			console.log(`Log in to existing account for email: ${inputEmail.value}  password: ${inputPassword.value}`);
-			firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
-			.then((userCredential) => {
-				// Signed in
-				window.location.href = `/positivityTimeline.html?uid=${uid}`;
-				console.log("Signed in", uid);
-				let user = userCredential.user;
-				// this._user.uid = userCredential.user.uid;
-				tempID = uid;
-
-				
-				// ...
-			})
-			.catch((error) => {
-				var errorCode = error.code;
-				var errorMessage = error.message;
-				// console.log("Create user error", errorCode, errorMessage);
-			});
+			rhit.fbAuth.logIn(inputEmail, inputPassword);
 		};
-		
-		firebase.auth().onAuthStateChanged((user) => {
-			if (user) {
-				rhit.user = JSON.stringify(user);
-				// console.log(rhit.user);
-				localStorage.setItem("user", rhit.user);			
-				this._user = user;
-				uid = user.uid;
-				var displayName = user.displayName;
-				var email = user.email;
-				var emailVerified = user.emailVerified;
-				var photoURL = user.photoURL;
-				var isAnonymous = user.isAnonymous;
-				var providerData = user.providerData;
-				console.log("Signed in", uid);
-				window.location.href = `/positivityTimeline.html?uid=${uid}`;
-				tempID = uid;
-				localStorage.setItem("userID", uid);
-			} else {
-				console.log("No user is signed in.");
-				// window.location.href = `/index.html`;
-				localStorage.setItem("userID", "");
-			}
-		  });
 
 		document.querySelector("#logInRosefire").onclick = (event) => {
-			this.signInRosefire();
-			window.location.href = `/positivityTimeline.html?uid=${rhit.loginController.uid}`;
+			// this.signInRosefire();
+			rhit.fbAuth.signInRosefire();
+			window.location.href = `/positivityTimeline.html?uid=${localStorage.getItem("userID")}`;
 		};
 
 	}
 
-	get isSignedIn() {
-		return !!this._user;
-	}
-	get uid() {
-		return this._user.uid;
-	}
-
-	signInRosefire() {
-		console.log("Sign in reached with rosefire");
-	Rosefire.signIn("ea2c30dc-6d5f-44a2-8c08-6daaf8433dad", (err, rfUser) => {	//This has correct key for B+
-	if (err) {
-	  console.log("Rosefire error!", err);
-	  return;
-	}
 
 	
-
-	firebase.auth().signInWithCustomToken(rfUser.token).catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// console.log("Create user error", errorCode, errorMessage);
-			if(errorCode === 'auth/invalid-custom-token'){
-				alert('The token you provided is not valid');
-			} else{
-				console.error("custom auth error", errorCode, errorMessage);
-			}
-		});
-
- 	 });
-  
-	};
 	// get uid() {
 	// 	return tempID;
 	// }
@@ -644,16 +755,12 @@ rhit.SettingsPageController = class {
 		};
 
 		document.querySelector('#deleteAccountButton').onclick = (event) => {
-			let use1 = localStorage.getItem("user");
-			console.log(use1)
-			let use = JSON.parse(use1);
-			console.log(use)
-			use.delete().then(() => {
-				console.log("User deleted")
-			  }).catch((error) => {
-				// An error ocurred
-				// ...
-			  });
+			// let use1 = localStorage.getItem("user");
+			// console.log(use1)
+			// let use = JSON.parse(use1);
+			// console.log(use)
+			// const user = firebase.auth().currentUser;
+			rhit.fbAuth.deleteAccount();
 			document.location.href = "/";
 
 		}
@@ -697,37 +804,13 @@ rhit.IncineratorPageController = class {
 			this.signOut();
 		};
 
-		document.querySelector("#draggable-1").onDragStart = (event) => {
-			console.log("in onDragStart");
-			document.querySelector('#innerInput').innerHTML = "";
-			document.querySelector('#innerInput').innerHTML = `<input type="negative" id="inputnegative" class="form-control" />`;
-		}
 
-		const drag = document.querySelector('#draggable-1');
-		drag.addEventListener("drop", (event) => {
-			event.preventDefault();
-			console.log("got here");
-		});
+		
+
 		
 	}
 
-	drop(ev) {
-		ev.preventDefault();
 
-		console.log("got here");
-	  
-		const data = ev.dataTransfer.getData("text");
-	  
-		const element = document.getElementById(data);
-	  
-		ev.target.appendChild(element);
-	  
-		console.log(`${data} in ${ev.target.id}`);
-	  }
-
-	handleDrop(){
-		
-	}
 
 	signOut(){
 		firebase.auth().signOut().catch((error) => {
@@ -798,6 +881,7 @@ rhit.BackgroundChecker = class {
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
+	rhit.fbAuth = new rhit.FBAuth();
 	// rhit.backgroundChecker = new rhit.BackgroundChecker();
 	if(localStorage.getItem("theme") == null){
 		localStorage.setItem("theme","green");

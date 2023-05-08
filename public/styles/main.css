@@ -90,15 +90,51 @@ body {
     bottom: 50px;
     color: white;
     z-index: 999;
-    width: 200px;
+    width: 300px;
     opacity: 1.0;
     width: 20%;
     /* mix-blend-mode:soft-light; */
 }
 
-#fire:hover{
+#dragtarget {
+    margin-left: auto;
+    margin-right: auto;
+    /* position: absolute; */
+    z-index: 9;
+    text-align: center;
+    border: none;
+    opacity: 100%;
+    background-color: var(--theme-color-light);
+  }
+  
+  /* #droptargetheader {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+  } */
+  
+  .droptarget {
+    /* width: 250px; 
+    height: 250px;
+    padding: 10px;
+    border: 1px solid black;
+    margin-left: 300px */
+    height: 100px;
+    border: 1px;
+    border-color: transparent;
+    position: fixed;
+    right: 10px;
+    bottom: 50px;
+    z-index: 999;
+    width: 100px;
+    width: 20%;
+  }
+
+/* #fire:hover{
     opacity: 0.5;
-}
+} */
 
 #listPage .card-title,#listPage .card-subtitle {
     white-space: nowrap;
