@@ -262,6 +262,10 @@ body {
     background-color: var(--theme-color); color: white;
 }
 
+#logInRosefire{
+    margin: 5px 0px 0px 0px;
+}
+
 #inputnegative{
     text-align: center;
 }

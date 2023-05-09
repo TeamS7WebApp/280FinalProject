@@ -822,11 +822,10 @@ rhit.IncineratorPageController = class {
 
 rhit.BackgroundChecker = class {
     constructor(){
-		
-
 		this.checkBackground();
 		this.checkFavicon();
         this.checkTextTheme();
+		this.checkCheerUpImage();
     }
 
 	toDataURL(src, callback, outputFormat) {
@@ -938,6 +937,19 @@ rhit.BackgroundChecker = class {
 		r.style.setProperty('--theme-color-card', `var(--transparent-${color})`);
 	}
 
+	checkCheerUpImage(){
+		let dataImage = localStorage.getItem('image');
+
+		if(dataImage == null){
+			// document.getElementById("cheerUpImage").src=`https://picsum.photos/${Math.floor(600 + (Math.random() * 100))}/${Math.floor(600 + (Math.random() * 100))}`;
+			this.toDataURL(`https://picsum.photos/${Math.floor(900 + (Math.random() * 100))}/${Math.floor(900 + (Math.random() * 100))}`,
+				function (dataUrl) {
+				//  console.log('RESULT:', dataUrl)
+				localStorage.setItem('image', dataUrl);
+			})
+		}
+	}
+
     
 }
 
@@ -1023,7 +1035,7 @@ rhit.main = function () {
 
 rhit.startFirebaseUI = function() {		//used for firebase authentication ui
 	var uiConfig = {
-		// signInSuccessUrl: `/positivityTimeline.html?uid=${rhit.loginController.uid}`, // redirecting URL
+		signInSuccessUrl: `/positivityTimeline.html?uid=${rhit.loginController.uid}`, // redirecting URL
 		signInOptions: [
 			// firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 			// firebase.auth.EmailAuthProvider.PROVIDER_ID,
