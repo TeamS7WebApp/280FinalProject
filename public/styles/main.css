@@ -245,9 +245,10 @@ body {
     font-size: x-large;
 }
 
-#deleteAccountButton{
+#deleteDataButton{
     background-color: var(--color-red);
     color: white;
+    margin: 0px 0px 0px 30px;
 }
 
 #deleteAccountDiv{

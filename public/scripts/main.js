@@ -754,7 +754,7 @@ rhit.SettingsPageController = class {
 			this.changeTheme("red");
 		};
 
-		document.querySelector('#deleteAccountButton').onclick = (event) => {
+		document.querySelector('#deleteDataButton').onclick = (event) => {
 			// let use1 = localStorage.getItem("user");
 			// console.log(use1)
 			// let use = JSON.parse(use1);
