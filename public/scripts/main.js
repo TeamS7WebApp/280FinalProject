@@ -93,10 +93,12 @@ rhit.PositivityTimelineController = class {
 
 	_createCard(happyElement) {
 		// console.log(happyElement);
+		let originalDateString = happyElement.timestamp.toDate();
+		// originalDateString.toString().slice(0,-30)
 		return htmlToElement(`<div class="card">
 		<div class="card-body">
 		<h5 style="text-align: center;" class="card-title">${happyElement.happyElement}</h5>
-		  <h6 class="card-subtitle mb-2 text-muted">${happyElement.timestamp.toDate()}</h6>
+		  <h6 class="card-subtitle mb-2 text-muted">${originalDateString.toString().slice(0,-38)}</h6>
 		</div>
 	  </div>`);
 	}
