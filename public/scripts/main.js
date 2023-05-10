@@ -850,36 +850,12 @@ rhit.BackgroundChecker = class {
 
 	checkBackground(){
 		if(localStorage.getItem('background_green') == 'YoUr MoM'){		//should never occur
-            this.toDataURL(`images/green_back.jpg`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('background_green', dataUrl);
-            });
-            this.toDataURL(`images/blue_back.jpg`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('background_blue', dataUrl);
-            });
-            this.toDataURL(`images/orange_back.jpg`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('background_orange', dataUrl);
-            });
-            this.toDataURL(`images/purple_back.jpg`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('background_purple', dataUrl);
-            });
-            this.toDataURL(`images/pink_back.jpg`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('background_pink', dataUrl);
-            });
-            this.toDataURL(`images/red_back.jpg`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('background_red', dataUrl);
-			});
+			this.checkBackgroundHelper("green");
+			this.checkBackgroundHelper("blue");
+			this.checkBackgroundHelper("orange");
+			this.checkBackgroundHelper("purple");
+			this.checkBackgroundHelper("pink");
+			this.checkBackgroundHelper("red");
 			this.toDataURL(`images/aaa.jpg`,
              function (dataUrl) {
                 console.log('RESULT:', dataUrl)
@@ -888,40 +864,33 @@ rhit.BackgroundChecker = class {
         }
 	}
 
+	checkBackgroundHelper(color){
+		this.toDataURL(`images/${color}_back.jpg`,
+             function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+                localStorage.setItem(`background_${color}`, dataUrl);
+			});
+	}
+
 	checkFavicon(){
 		if(localStorage.getItem('favicon_green') == null){
-			this.toDataURL(`images/green_favicon.ico`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('favicon_green', dataUrl);
-            });
-            this.toDataURL(`images/blue_favicon.ico`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('favicon_blue', dataUrl);
-            });
-            this.toDataURL(`images/orange_favicon.ico`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('favicon_orange', dataUrl);
-            });
-            this.toDataURL(`images/purple_favicon.ico`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('favicon_purple', dataUrl);
-            });
-            this.toDataURL(`images/pink_favicon.ico`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('favicon_pink', dataUrl);
-            });
-            this.toDataURL(`images/red_favicon.ico`,
-             function (dataUrl) {
-                console.log('RESULT:', dataUrl)
-                localStorage.setItem('favicon_red', dataUrl);
-			});
+			this.checkFaviconHelper("green");
+			this.checkFaviconHelper("blue");
+			this.checkFaviconHelper("orange");
+			this.checkFaviconHelper("purple");
+            this.checkFaviconHelper("pink");
+            this.checkFaviconHelper("red");
 			// console.log("favicons in local storage")
 		}
+	}
+
+	checkFaviconHelper(color){
+		this.toDataURL(`images/${color}_favicon.ico`,
+				function (dataUrl) {
+					// console.log("uhhhh")
+					// console.log('RESULT:', dataUrl)
+					localStorage.setItem(`favicon_${color}`, dataUrl);
+				});
 	}
 
 	checkTextTheme(){
