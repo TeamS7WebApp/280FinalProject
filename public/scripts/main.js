@@ -95,16 +95,19 @@ rhit.PositivityTimelineController = class {
 		// console.log(happyElement);
 		return htmlToElement(`<div class="card">
 		<div class="card-body">
-		  <h5 style="text-align: center;" class="card-title">${happyElement.happyElement}</h5>
-		</div>`);
+		<h5 style="text-align: center;" class="card-title">${happyElement.happyElement}</h5>
+		  <h6 class="card-subtitle mb-2 text-muted">${happyElement.timestamp.toDate()}</h6>
+		</div>
+	  </div>`);
 	}
 }
 
 rhit.TimelineElement = class {
-	constructor(id, text, author) {
+	constructor(id, text, author, timestamp) {
 		this.id = id;
 		this.happyElement = text; 
 		this.author = author;
+		this.timestamp = timestamp;
 	}
 }
 
@@ -169,8 +172,7 @@ rhit.ElementManager = class {
 	getElementAtIndex(index) {    
 		const docSnapshot = this._documentSnapshots[index];
 		const te = new rhit.TimelineElement(
-			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_ENTRY), docSnapshot.get(rhit.FB_KEY_AUTHOR)
-		);
+			docSnapshot.id, docSnapshot.get(rhit.FB_KEY_ENTRY), docSnapshot.get(rhit.FB_KEY_AUTHOR), docSnapshot.get(rhit.FB_KEY_LAST_TOUCHED));
 		return te;
 	}
 }
