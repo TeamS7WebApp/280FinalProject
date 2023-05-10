@@ -822,6 +822,7 @@ rhit.IncineratorPageController = class {
 
 rhit.BackgroundChecker = class {
     constructor(){
+		this.colorArray = ["green", "blue", "orange", "purple", "pink", "red"]
 		this.checkBackground();
 		this.checkFavicon();
         this.checkTextTheme();
