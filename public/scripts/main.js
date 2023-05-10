@@ -408,7 +408,8 @@ rhit.CheerUpPageController = class {
 				}
 				final += curIndex[i];
 			}
-			if(final == "undefined"){
+			if(!Number.isInteger(final.length)){
+				console.log("we done broke it")
 				final = "If your mind is too open your brains will fall out";
 			}
 			document.querySelector("#quoteTextCheerUp").innerHTML = final;
