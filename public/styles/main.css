@@ -114,6 +114,11 @@ body {
     border-radius: 16px;
 }
 
+.text-muted{
+    color: rgba(108,117,125,0.45)!important;
+    font-size: 95%;
+}
+
 #fire{
     position: fixed;
     right: 10px;

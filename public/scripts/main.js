@@ -98,7 +98,7 @@ rhit.PositivityTimelineController = class {
 		return htmlToElement(`<div class="card">
 		<div class="card-body">
 		<h5 style="text-align: center;" class="card-title">${happyElement.happyElement}</h5>
-		  <h6 class="card-subtitle mb-2 text-muted">${originalDateString.toString().slice(0,-38)}</h6>
+		<h6 style="text-align: end;"class="card-subtitle mb-2 text-muted">${originalDateString.toString().slice(0,-36)}</h6>
 		</div>
 	  </div>`);
 	}
