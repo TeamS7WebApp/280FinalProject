@@ -195,7 +195,15 @@ rhit.TimelineElementController = class {
 			document.querySelector("#inputQuote").focus();
 		});
 
+		$("#deleteQuoteDialog").on("show.bs.modal", (event) => {
+			document.querySelector("#inputQuote").value = rhit.fbSingleTimelineEntryManager.happyText;
+		});
+		$("#deleteQuoteDialog").on("shown.bs.modal", (event) => {
+			document.querySelector("#inputQuote").focus();
+		});
+
 		document.querySelector("#submitDeleteQuote").addEventListener("click", (event) => {
+			
 			rhit.fbSingleTimelineEntryManager.delete().then(function() {
 				console.log("Document successfully deleted!");
 				// window.location.href = "/positivityTimeline.html";
@@ -203,7 +211,10 @@ rhit.TimelineElementController = class {
 			}).catch(function(error){
 				console.error("Error removing document: ", error);
 			});
+			// console.log("dletedededed")
 		});
+
+		
 
 		rhit.fbSingleTimelineEntryManager.beginListening(this.updateView.bind(this));
 
