@@ -222,7 +222,7 @@ rhit.TimelineElementController = class {
 	}
 	updateView() {  
 		document.querySelector("#cardQuote").innerHTML = rhit.fbSingleTimelineEntryManager.happyText;
-
+		document.querySelector("#cardTime").innerHTML = rhit.fbSingleTimelineEntryManager.timestamp.toDate().toString().slice(0,-36);
 	}
 }
 
@@ -268,6 +268,10 @@ rhit.SingleElementManager = class {
 
  get happyText(){
 	return this._documentSnapshot.get(rhit.FB_KEY_ENTRY);
+ }
+
+ get timestamp(){
+	return this._documentSnapshot.get(rhit.FB_KEY_LAST_TOUCHED);
  }
 }
 
