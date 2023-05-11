@@ -341,7 +341,7 @@ body {
 }
 
 [class*=" bmd-label"], [class^=bmd-label] {
-    /* color: var(--theme-color); */
+    color: var(--theme-color-light);
 }
 
 .is-focused [class*=" bmd-label"], .is-focused [class^=bmd-label]{
