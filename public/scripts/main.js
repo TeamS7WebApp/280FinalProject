@@ -774,15 +774,15 @@ rhit.SettingsPageController = class {
 			this.changeTheme("red");
 		};
 
-		document.querySelector('#deleteDataButton').onclick = (event) => {
-			// let use1 = localStorage.getItem("user");
-			// console.log(use1)
-			// let use = JSON.parse(use1);
-			// console.log(use)
-			// const user = firebase.auth().currentUser;
-			rhit.fbAuth.deleteAccount();
-			document.location.href = "/";
+		document.querySelector('#memeOnButton').onclick = (event) => {
+			
+			localStorage.setItem("prevTheme", localStorage.getItem("theme"));
+			localStorage.setItem("theme", "meme");
 
+		}
+
+		document.querySelector('#memeOffButton').onclick = (event) => {
+			localStorage.setItem("theme", localStorage.getItem("prevTheme"));
 		}
 	}
 

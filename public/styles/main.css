@@ -284,6 +284,12 @@ body {
     background-attachment: fixed;
 }
 
+#memeDropdown{
+    position: absolute;
+    margin: 0 0 0 20px;
+    display: inline-block;
+}
+
 /* Dropdown Button */
 .dropbtn {
     background-color: var(--theme-color);
