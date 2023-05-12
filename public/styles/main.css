@@ -13,6 +13,8 @@
     --color-orange: #d4540d ;
     --color-orange-light: #e07f45 ;
     --color-white: #ffff;
+    --color-meme: #0000;
+    --color-meme-light: #ffff;
     --theme-color: var(--color-white);
     --theme-color-light: var(--color-white);
     --theme-color-card: var(--transparent-light);

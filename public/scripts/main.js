@@ -52,7 +52,7 @@ rhit.PositivityTimelineController = class {
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.${localStorage.getItem("fileType")}")`);
 		let link = document.querySelector("link[rel~='icon']");
 		if (!link) {
 			link = document.createElement('link');
@@ -222,7 +222,7 @@ rhit.TimelineElementController = class {
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.${localStorage.getItem("fileType")}")`);
 		let link = document.querySelector("link[rel~='icon']");
 		if (!link) {
 			link = document.createElement('link');
@@ -304,7 +304,7 @@ rhit.CheerUpPageController = class {
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.${localStorage.getItem("fileType")}")`);
 		let link = document.querySelector("link[rel~='icon']");
 		if (!link) {
 			link = document.createElement('link');
@@ -682,7 +682,7 @@ rhit.LoginPageController = class{
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.${localStorage.getItem("fileType")}")`);
 		let link = document.querySelector("link[rel~='icon']");
 		if (!link) {
 			link = document.createElement('link');
@@ -778,11 +778,15 @@ rhit.SettingsPageController = class {
 			
 			localStorage.setItem("prevTheme", localStorage.getItem("theme"));
 			localStorage.setItem("theme", "meme");
+			localStorage.setItem("fileType","gif");
+			this.changeTheme("meme");
 
 		}
 
 		document.querySelector('#memeOffButton').onclick = (event) => {
 			localStorage.setItem("theme", localStorage.getItem("prevTheme"));
+			localStorage.setItem("fileType","jpg");
+			this.changeTheme(localStorage.getItem("prevTheme"));
 		}
 	}
 
@@ -791,7 +795,7 @@ rhit.SettingsPageController = class {
 			r.style.setProperty('--theme-color', `var(--color-${aaaatheme})`);
 			r.style.setProperty('--theme-color-light', `var(--color-${aaaatheme}-light)`);
 			let b = document.querySelector('#backgroundImage');
-			b.style.setProperty('background-image', `url("../images/${aaaatheme}_back.jpg")`);
+			b.style.setProperty('background-image', `url("../images/${aaaatheme}_back.${localStorage.getItem("fileType")}")`);
 			let link = document.querySelector("link[rel~='icon']");
 		if (!link) {
 			link = document.createElement('link');
@@ -811,7 +815,7 @@ rhit.IncineratorPageController = class {
 		r.style.setProperty('--theme-color', `var(--color-${localStorage.getItem("theme")})`);
 		r.style.setProperty('--theme-color-light', `var(--color-${localStorage.getItem("theme")}-light)`);
 		let b = document.querySelector('#backgroundImage');
-		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.jpg")`);
+		b.style.setProperty('background-image', `url("../images/${localStorage.getItem("theme")}_back.${localStorage.getItem("fileType")}")`);
 		let link = document.querySelector("link[rel~='icon']");
 		if (!link) {
 			link = document.createElement('link');
@@ -843,6 +847,7 @@ rhit.IncineratorPageController = class {
 rhit.BackgroundChecker = class {
     constructor(){
 		this.colorArray = ["green", "blue", "orange", "purple", "pink", "red"]
+		this.setMemeBack();
 		this.checkBackground();
 		this.checkFavicon();
         this.checkTextTheme();
@@ -937,6 +942,15 @@ rhit.BackgroundChecker = class {
 				//  console.log('RESULT:', dataUrl)
 				localStorage.setItem('image', dataUrl);
 			})
+		}
+	}
+
+	setMemeBack(){
+		if(localStorage.getItem("theme") == "meme"){
+			localStorage.setItem("fileType","gif");
+		}
+		else{
+			localStorage.setItem("fileType","jpg");
 		}
 	}
 
