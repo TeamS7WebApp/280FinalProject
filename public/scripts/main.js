@@ -736,12 +736,24 @@ rhit.LoginPageController = class{
 }
 
 rhit.checkForRedirects = function() {
-	if(document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn){
-		window.location.href = "/positivityTimeline.html";
+	// if(document.querySelector("#loginPage") && rhit.fbAuthManager.isSignedIn){
+	// 	window.location.href = "/positivityTimeline.html";
+	// } 
+	// if(!document.querySelector("#loginPage") && !rhit.fbAuthManager.isSignedIn){
+	// 	window.location.href = "/index.html";
+	// } 
+	let check = true;
+
+	if(!document.querySelector("#loginPage")){
+		check = false;
 	} 
-	if(!document.querySelector("#loginPage") && !rhit.fbAuthManager.isSignedIn){
+	
+	if(localStorage.getItem("user") == null && check){
 		window.location.href = "/index.html";
-	} 
+	}
+	if(localStorage.getItem("userID") == null && !document.querySelector("#mainPage")){
+		window.location.href = "/index.html";
+	}
 };
 
 rhit.SettingsPageController = class {
@@ -967,6 +979,7 @@ rhit.BackgroundChecker = class {
 /** function and class syntax examples */
 rhit.main = function () {
 	console.log("Ready");
+	rhit.redirect = new rhit.checkForRedirects();
 	rhit.fbAuth = new rhit.FBAuth();
 	if(localStorage.getItem("theme") == null){
 		localStorage.setItem("theme","green");
