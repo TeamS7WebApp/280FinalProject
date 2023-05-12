@@ -750,27 +750,33 @@ rhit.SettingsPageController = class {
 
 		document.querySelector("#greenTheme").onclick = (event) => {
 			localStorage.setItem("theme", "green");
+			localStorage.setItem("prevTheme",localStorage.getItem("theme"));
 			this.changeTheme("green");
 			
 		};
 		document.querySelector("#blueTheme").onclick = (event) => {
 			localStorage.setItem("theme", "blue");
+			localStorage.setItem("prevTheme",localStorage.getItem("theme"));
 			this.changeTheme("blue");
 		};
 		document.querySelector("#orangeTheme").onclick = (event) => {
 			localStorage.setItem("theme", "orange");
+			localStorage.setItem("prevTheme",localStorage.getItem("theme"));
 			this.changeTheme("orange");
 		};
 		document.querySelector("#purpleTheme").onclick = (event) => {
 			localStorage.setItem("theme", "purple");
+			localStorage.setItem("prevTheme",localStorage.getItem("theme"));
 			this.changeTheme("purple");
 		};
 		document.querySelector("#pinkTheme").onclick = (event) => {
 			localStorage.setItem("theme", "pink");
+			localStorage.setItem("prevTheme",localStorage.getItem("theme"));
 			this.changeTheme("pink");
 		};
 		document.querySelector("#redTheme").onclick = (event) => {
 			localStorage.setItem("theme", "red");
+			localStorage.setItem("prevTheme",localStorage.getItem("theme"));
 			this.changeTheme("red");
 		};
 
