@@ -933,6 +933,7 @@ rhit.BackgroundChecker = class {
 				function (dataUrl) {
 					// console.log("uhhhh")
 					// console.log('RESULT:', dataUrl)
+					// console.log(dataUrl);
 					localStorage.setItem(`favicon_${color}`, dataUrl);
 				});
 	}
