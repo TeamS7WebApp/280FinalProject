@@ -77,34 +77,11 @@
 
 <script>
 
-  function replaceCard() {
+  function replaceInputBox() {
     console.log("inside replace");
-    document.getElementById("negativityIncinerator").innerHTML = "";
-    document.getElementById("negativityIncinerator").innerHTML = `  <div draggable="true" id="dragtarget">
-    <div class="negInc lineColor form-outline mb-4 example-draggable">
-        <div>&nbsp;</div>
-        <center>
-         <label class="negText form-label" for="inputNeg">What's Bothering you Today?</label>
-        </center>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-        <div id="innerInput">
-        <input type="negative" id="inputnegative" class="form-control" />
-        </div>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-      </div>
-  </div>
-  
-  <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
-    <img id="fire" class="rose_image" src="images/dump.gif" alt="garbage can flame">
-  </div>
+    document.getElementById("innerInput").innerHTML = `<input type="negative" id="inputnegative" class="form-control"/>`
 
-
-<div id="firebaseui-auth-container"></div>`
   }
-  
   
   function allowDrop(event) {
     event.preventDefault();
@@ -113,7 +90,7 @@
   function drop(event) {
     event.preventDefault();
     document.getElementById("innerInput").innerHTML = "";
-    replaceCard();
+    replaceInputBox();
   }
   
   </script>
