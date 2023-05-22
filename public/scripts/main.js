@@ -611,6 +611,8 @@ rhit.FBAuth = class {
 	signInRosefire() {
 		console.log("Sign in reached with rosefire");
 	Rosefire.signIn("ea2c30dc-6d5f-44a2-8c08-6daaf8433dad", (err, rfUser) => {	//This has correct key for B+
+		// window.location.href = `/positivityTimeline.ht`;
+		// localStorage.setItem("uid",rfUser)
 	if (err) {
 	  console.log("Rosefire error!", err);
 	  return;
@@ -643,6 +645,9 @@ rhit.FBAuth = class {
 		// window.location.href = `/positivityTimeline.html?uid=${uid}`;
 		// tempID = uid;
 		localStorage.setItem("userID", uid);
+		if(uid.length < 12){
+			window.location.href = `/positivityTimeline.html?uid=${uid}`;
+		}
 	} else {
 		console.log("No user is signed in.");
 		// window.location.href = `/index.html`;
@@ -717,7 +722,7 @@ rhit.LoginPageController = class{
 		document.querySelector("#logInRosefire").onclick = (event) => {
 			// this.signInRosefire();
 			rhit.fbAuth.signInRosefire();
-			window.location.href = `/positivityTimeline.html?uid=${localStorage.getItem("userID")}`;
+			// window.location.href = `/positivityTimeline.html?uid=${localStorage.getItem("userID")}`;
 		};
 
 	}
